@@ -767,7 +767,7 @@ function ContactSection() {
             <motion.div variants={fadeUp} className="lg:col-span-2 space-y-5">
               {[
                 { icon: Phone, label: 'Phone', lines: ['+91 98370 28544', '+91 79833 92736'], href: 'tel:+919837028544' },
-                { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'ipci2027@ipci.co.in'], href: 'mailto:info@ipci2027.co.in' },
+                { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in'], href: 'mailto:info@ipci2027.co.in' },
                 { icon: MapPin, label: 'Venue', lines: ['Rudrapur, Uttarakhand, India', '12–14 February 2027'], href: null },
                 { icon: Globe, label: 'Website', lines: ['www.ipci.co.in'], href: 'https://www.ipci.co.in' },
               ].map(({ icon: Icon, label, lines, href }, i) => (
