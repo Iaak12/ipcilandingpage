@@ -154,13 +154,13 @@ function SectionTag({ children, icon: Icon }) {
 function CountdownUnit({ value, label }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="glass rounded-2xl px-4 py-3 sm:px-6 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center relative overflow-hidden">
+      <div className="glass rounded-xl sm:rounded-2xl px-2.5 py-2.5 sm:px-6 sm:py-4 min-w-[56px] sm:min-w-[80px] text-center relative overflow-hidden">
         <div className="shimmer absolute inset-0 opacity-40" />
-        <span className="relative text-3xl sm:text-4xl md:text-5xl font-black text-[#0B1E4A] tabular-nums leading-none">
+        <span className="relative text-2xl sm:text-4xl md:text-5xl font-black text-[#0B1E4A] tabular-nums leading-none">
           {String(value).padStart(2, '0')}
         </span>
       </div>
-      <span className="mt-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-500">{label}</span>
+      <span className="mt-1.5 sm:mt-2 text-[9px] sm:text-xs font-bold uppercase tracking-widest text-slate-500">{label}</span>
     </div>
   );
 }
@@ -305,13 +305,13 @@ function HeroSection() {
         {/* Countdown */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
           <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Event Starts In</p>
-          <div className="flex justify-center items-end gap-3 sm:gap-5 mb-10">
+          <div className="flex justify-center items-end gap-1.5 sm:gap-5 mb-10 px-1 sm:px-0 max-w-full">
             <CountdownUnit value={countdown.days} label="Days" />
-            <span className="text-3xl sm:text-4xl font-black text-emerald-400 mb-7">:</span>
+            <span className="text-2xl sm:text-4xl font-black text-emerald-400 mb-5 sm:mb-7">:</span>
             <CountdownUnit value={countdown.hours} label="Hours" />
-            <span className="text-3xl sm:text-4xl font-black text-emerald-400 mb-7">:</span>
+            <span className="text-2xl sm:text-4xl font-black text-emerald-400 mb-5 sm:mb-7">:</span>
             <CountdownUnit value={countdown.minutes} label="Minutes" />
-            <span className="text-3xl sm:text-4xl font-black text-emerald-400 mb-7">:</span>
+            <span className="text-2xl sm:text-4xl font-black text-emerald-400 mb-5 sm:mb-7">:</span>
             <CountdownUnit value={countdown.seconds} label="Seconds" />
           </div>
         </motion.div>
