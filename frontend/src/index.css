@@ -256,4 +256,19 @@
   .nav-link:hover::after {
     width: 100%;
   }
+
+  /* Mobile auto-scroll marquee */
+  .marquee-track {
+    animation: marqueeScroll 18s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
 }

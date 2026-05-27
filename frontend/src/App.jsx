@@ -329,18 +329,37 @@ function HeroSection() {
           </a>
         </motion.div>
 
-        {/* At a Glance Pillars */}
+        {/* At a Glance Pillars — auto-scroll on mobile, grid on desktop */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.7 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl mx-auto">
-          {AT_A_GLANCE.map(({ icon: Icon, label }, i) => (
-            <motion.div key={i} whileHover={{ y: -4, scale: 1.02 }} transition={{ duration: 0.2 }}
-              className="glass rounded-2xl p-4 flex flex-col items-center gap-2 text-center card-hover">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-50 to-sky-50 border border-emerald-100 flex items-center justify-center">
-                <Icon size={18} className="text-emerald-600" />
-              </div>
-              <p className="text-xs font-semibold text-slate-700 leading-snug">{label}</p>
-            </motion.div>
-          ))}
+          className="w-full max-w-5xl mx-auto">
+
+          {/* MOBILE: infinite marquee */}
+          <div className="lg:hidden overflow-hidden w-full">
+            <div className="flex gap-3 marquee-track">
+              {[...AT_A_GLANCE, ...AT_A_GLANCE, ...AT_A_GLANCE].map(({ icon: Icon, label }, i) => (
+                <div key={i} className="glass rounded-2xl p-4 flex flex-col items-center gap-2 text-center shrink-0 w-40">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-50 to-sky-50 border border-emerald-100 flex items-center justify-center">
+                    <Icon size={18} className="text-emerald-600" />
+                  </div>
+                  <p className="text-xs font-semibold text-slate-700 leading-snug">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* DESKTOP: static grid */}
+          <div className="hidden lg:grid grid-cols-5 gap-3">
+            {AT_A_GLANCE.map(({ icon: Icon, label }, i) => (
+              <motion.div key={i} whileHover={{ y: -4, scale: 1.02 }} transition={{ duration: 0.2 }}
+                className="glass rounded-2xl p-4 flex flex-col items-center gap-2 text-center card-hover">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-50 to-sky-50 border border-emerald-100 flex items-center justify-center">
+                  <Icon size={18} className="text-emerald-600" />
+                </div>
+                <p className="text-xs font-semibold text-slate-700 leading-snug">{label}</p>
+              </motion.div>
+            ))}
+          </div>
+
         </motion.div>
       </div>
 
