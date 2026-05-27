@@ -525,10 +525,22 @@ function ScopeSection() {
                 <span className="w-1.5 h-7 rounded-full bg-gradient-to-b from-emerald-400 to-sky-500 inline-block" />
                 Topics & Scope
               </h3>
-              <div className="grid grid-rows-2 grid-flow-col lg:flex lg:flex-wrap gap-3 overflow-x-auto hide-scrollbar pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 snap-x snap-mandatory">
+              {/* MOBILE: Auto-scroll 2 rows */}
+              <div className="lg:hidden overflow-hidden -mx-4">
+                <div className="grid grid-rows-2 grid-flow-col gap-3 scope-marquee pb-4 px-4">
+                  {[...SCOPE_ITEMS, ...SCOPE_ITEMS, ...SCOPE_ITEMS].map((item, i) => (
+                    <div key={i} className="px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 glass border border-emerald-100 shadow-sm whitespace-nowrap w-max">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* DESKTOP: Static Wrap */}
+              <div className="hidden lg:flex flex-wrap gap-2.5">
                 {SCOPE_ITEMS.map((item, i) => (
                   <motion.span key={i} variants={scaleIn} whileHover={{ scale: 1.05 }}
-                    className="snap-start shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 glass border border-emerald-100 hover:border-emerald-300 hover:text-emerald-700 cursor-default transition-all duration-200 shadow-sm whitespace-nowrap w-max">
+                    className="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 glass border border-emerald-100 hover:border-emerald-300 hover:text-emerald-700 cursor-default transition-all duration-200 shadow-sm">
                     {item}
                   </motion.span>
                 ))}

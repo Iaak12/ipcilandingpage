@@ -283,6 +283,15 @@
     100% { transform: translateX(-25%); }
   }
 
+  /* Scope section auto-scroll */
+  .scope-marquee {
+    animation: marqueeScroll 40s linear infinite;
+    width: max-content;
+  }
+  .scope-marquee:hover {
+    animation-play-state: paused;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
