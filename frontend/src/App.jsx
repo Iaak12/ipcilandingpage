@@ -364,10 +364,25 @@ function HeroSection() {
       </div>
 
       {/* Tagline strip */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-emerald-600 via-teal-500 to-sky-500 py-2 flex justify-center gap-8 sm:gap-16 overflow-hidden">
-        {['Knowledge', 'Collaboration', 'Compassion', 'Cure'].map((w, i) => (
-          <span key={i} className="text-white font-bold text-xs sm:text-sm uppercase tracking-widest whitespace-nowrap">{w}</span>
-        ))}
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-emerald-600 via-teal-500 to-sky-500 py-2 overflow-hidden">
+        {/* MOBILE: auto-scroll */}
+        <div className="sm:hidden overflow-hidden w-full">
+          <div className="flex gap-6 tagline-track">
+            {[...Array(6)].flatMap(() =>
+              ['Knowledge', 'Collaboration', 'Compassion', 'Cure'].map((w, i) => (
+                <span key={`${w}-${i}`} className="text-white font-bold text-xs uppercase tracking-widest whitespace-nowrap flex items-center gap-6">
+                  {w} <span className="opacity-50">•</span>
+                </span>
+              ))
+            )}
+          </div>
+        </div>
+        {/* DESKTOP: static centered */}
+        <div className="hidden sm:flex justify-center gap-16">
+          {['Knowledge', 'Collaboration', 'Compassion', 'Cure'].map((w, i) => (
+            <span key={i} className="text-white font-bold text-sm uppercase tracking-widest whitespace-nowrap">{w}</span>
+          ))}
+        </div>
       </div>
     </section>
   );

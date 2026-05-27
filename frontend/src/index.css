@@ -271,4 +271,15 @@
     0%   { transform: translateX(0); }
     100% { transform: translateX(-33.333%); }
   }
+
+  /* Tagline strip auto-scroll */
+  .tagline-track {
+    animation: taglineScroll 12s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes taglineScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
 }
