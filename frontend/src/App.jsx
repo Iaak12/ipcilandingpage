@@ -769,7 +769,7 @@ function ContactSection() {
                 { icon: Phone, label: 'Phone', lines: ['+91 98370 28544', '+91 79833 92736'], href: 'tel:+919837028544' },
                 { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in'], href: 'mailto:info@ipci2027.co.in' },
                 { icon: MapPin, label: 'Venue', lines: ['Rudrapur, Uttarakhand, India', '12–14 February 2027'], href: null },
-                { icon: Globe, label: 'Website', lines: ['www.ipci.co.in'], href: 'https://www.ipci.co.in' },
+                { icon: Globe, label: 'Website', lines: ['www.ipci2027.co.in'], href: 'https://www.ipci2027.co.in' },
               ].map(({ icon: Icon, label, lines, href }, i) => (
                 <motion.div key={i} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}
                   className="glass rounded-2xl p-5 border border-white shadow-md hover:border-emerald-100 transition-colors group">
