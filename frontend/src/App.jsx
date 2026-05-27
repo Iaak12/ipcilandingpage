@@ -362,7 +362,7 @@ function AboutSection() {
     <section id="about" ref={ref} className="py-20 sm:py-28 px-4 mesh-bg relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
           {/* Left: About IPCI */}
           <motion.div variants={fadeUp}>
@@ -389,8 +389,8 @@ function AboutSection() {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-300/30 to-sky-300/20 blur-2xl scale-105 pointer-events-none" />
               <div className="relative glass rounded-3xl shadow-2xl shadow-emerald-100 border border-emerald-50 overflow-hidden">
                 {/* Photo area */}
-                <div className="relative h-72 sm:h-80 overflow-hidden">
-                  <img src="/Vd BP.webp" alt="Padma Shri Vaidya Balendu Prakash" className="w-full h-full object-cover object-top" />
+                <div className="relative h-80 sm:h-96 lg:h-[420px] overflow-hidden">
+                  <img src="/Vd BP.webp" alt="Padma Shri Vaidya Balendu Prakash" className="w-full h-full object-cover" style={{ objectPosition: 'center 15%' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E4A]/90 via-[#0B1E4A]/30 to-transparent" />
                   <div className="absolute top-4 right-4 flex items-center gap-2 bg-amber-400/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
                     <Award size={13} className="text-amber-900" />
