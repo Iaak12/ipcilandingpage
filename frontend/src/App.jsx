@@ -525,10 +525,10 @@ function ScopeSection() {
                 <span className="w-1.5 h-7 rounded-full bg-gradient-to-b from-emerald-400 to-sky-500 inline-block" />
                 Topics & Scope
               </h3>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="grid grid-rows-6 grid-flow-col lg:flex lg:flex-wrap gap-2.5 overflow-x-auto hide-scrollbar pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 snap-x snap-mandatory">
                 {SCOPE_ITEMS.map((item, i) => (
                   <motion.span key={i} variants={scaleIn} whileHover={{ scale: 1.05 }}
-                    className="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 glass border border-emerald-100 hover:border-emerald-300 hover:text-emerald-700 cursor-default transition-all duration-200 shadow-sm">
+                    className="snap-start shrink-0 px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 glass border border-emerald-100 hover:border-emerald-300 hover:text-emerald-700 cursor-default transition-all duration-200 shadow-sm whitespace-nowrap">
                     {item}
                   </motion.span>
                 ))}
@@ -541,10 +541,10 @@ function ScopeSection() {
                 <span className="w-1.5 h-7 rounded-full bg-gradient-to-b from-sky-400 to-emerald-400 inline-block" />
                 Conclave Highlights
               </h3>
-              <div className="space-y-3">
+              <div className="grid grid-rows-3 grid-flow-col lg:flex lg:flex-col lg:space-y-3 gap-3 overflow-x-auto hide-scrollbar pb-4 lg:pb-0 -mx-4 px-4 lg:mx-0 lg:px-0 snap-x snap-mandatory">
                 {HIGHLIGHTS.map((item, i) => (
                   <motion.div key={i} variants={fadeUp} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}
-                    className="flex items-center gap-3 glass rounded-xl px-5 py-3.5 border border-white shadow-sm hover:border-emerald-200 transition-all group">
+                    className="snap-start w-[85vw] sm:w-[350px] lg:w-auto shrink-0 flex items-center gap-3 glass rounded-xl px-5 py-3.5 border border-white shadow-sm hover:border-emerald-200 transition-all group">
                     <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-50 to-sky-50 border border-emerald-100 flex items-center justify-center shrink-0 group-hover:from-emerald-100 group-hover:to-sky-100 transition-colors">
                       <CheckCircle size={14} className="text-emerald-500" />
                     </div>
