@@ -971,7 +971,7 @@ function Footer() {
 
 // ─── SCROLL TO TOP ────────────────────────────────────────────────────────────
 
-function ScrollToTop() {
+function FloatingActions() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const handler = () => setVisible(window.scrollY > 400);
@@ -979,18 +979,30 @@ function ScrollToTop() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-sky-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all hover:-translate-y-1"
-          aria-label="Scroll to top"
-        >
-          <ChevronDown size={20} className="text-white rotate-180" />
-        </motion.button>
-      )}
-    </AnimatePresence>
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-center">
+      <motion.a
+        href="mailto:info@ipci2027.co.in"
+        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.05 }}
+        className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center shadow-xl shadow-sky-500/30 hover:shadow-sky-500/50 transition-all hover:-translate-y-1"
+        aria-label="Email Us"
+      >
+        <Mail size={22} className="text-white" />
+      </motion.a>
+
+      <AnimatePresence>
+        {visible && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all hover:-translate-y-1"
+            aria-label="Scroll to top"
+          >
+            <ChevronDown size={22} className="text-white rotate-180" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -1009,7 +1021,7 @@ function App() {
       <ParticipantsSection />
       <ContactSection />
       <Footer />
-      <ScrollToTop />
+      <FloatingActions />
     </div>
   );
 }
