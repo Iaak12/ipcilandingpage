@@ -1,7 +1,259 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
+  :root {
+    --green-50: #f0fdf4;
+    --green-100: #dcfce7;
+    --green-200: #bbf7d0;
+    --green-300: #86efac;
+    --green-400: #4ade80;
+    --green-500: #22c55e;
+    --green-600: #16a34a;
+    --sky-50: #f0f9ff;
+    --sky-100: #e0f2fe;
+    --sky-200: #bae6fd;
+    --sky-300: #7dd3fc;
+    --sky-400: #38bdf8;
+    --sky-500: #0ea5e9;
+    --sky-600: #0284c7;
+    --navy: #0B1E4A;
+    --mint: #10b981;
+    --cyan: #06b6d4;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+
   body {
-    @apply bg-slate-50 text-slate-900;
+    background: #f0fdf9;
+    color: #0f172a;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0fdf9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #10b981, #0ea5e9);
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .glass-dark {
+    background: rgba(11, 30, 74, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-green {
+    background: rgba(16, 185, 129, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .glass-sky {
+    background: rgba(14, 165, 233, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+  }
+
+  .gradient-text-green {
+    background: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-navy {
+    background: linear-gradient(135deg, #0B1E4A 0%, #1e3a8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+    color: white;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(16, 185, 129, 0.45);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #0B1E4A;
+    font-weight: 700;
+    padding: 13px 32px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(16, 185, 129, 0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .btn-outline:hover {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: #10b981;
+    transform: translateY(-2px);
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(14, 165, 233, 0.12));
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #10b981;
+    margin-bottom: 16px;
+  }
+
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(16, 185, 129, 0.15);
+  }
+
+  .mesh-bg {
+    background: 
+      radial-gradient(ellipse at 10% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 10%, rgba(14, 165, 233, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(52, 211, 153, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 60%, rgba(56, 189, 248, 0.10) 0%, transparent 50%),
+      #f0fdf9;
+  }
+
+  .hero-mesh {
+    background: 
+      radial-gradient(ellipse at 0% 0%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 100% 0%, rgba(14, 165, 233, 0.20) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(52, 211, 153, 0.15) 0%, transparent 60%),
+      linear-gradient(180deg, #ecfdf5 0%, #f0f9ff 50%, #f0fdf9 100%);
+  }
+
+  .section-wave {
+    position: relative;
+  }
+  .section-wave::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: inherit;
+    clip-path: ellipse(55% 100% at 50% 0%);
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .pulse-ring {
+    animation: pulseRing 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseRing {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 0.7; }
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .accordion-content {
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+  }
+
+  .nav-link {
+    position: relative;
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 4px 0;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #10b981, #0ea5e9);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .nav-link:hover {
+    color: #10b981;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
   }
 }
