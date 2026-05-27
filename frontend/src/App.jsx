@@ -193,14 +193,8 @@ function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" onClick={(e) => { e.preventDefault(); handleLinkClick('#hero'); }} className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-sky-500 flex items-center justify-center shadow-md shadow-emerald-500/30">
-              <span className="text-white font-black text-sm leading-none">IP</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-black text-[#0B1E4A] text-lg tracking-tight">IPCI <span className="gradient-text-green">2027</span></span>
-              <span className="text-[9px] text-slate-500 font-semibold uppercase tracking-widest hidden sm:block">International Pancreatitis Conclave</span>
-            </div>
+          <a href="#hero" onClick={(e) => { e.preventDefault(); handleLinkClick('#hero'); }} className="flex items-center gap-2">
+            <img src="/ipci2027Logo.png" alt="IPCI 2027 Logo" className="h-12 w-auto object-contain" />
           </a>
 
           {/* Desktop Nav */}
@@ -234,7 +228,7 @@ function Navbar() {
               transition={{ type: 'spring', damping: 28, stiffness: 300 }}
               className="fixed top-0 right-0 bottom-0 z-50 w-80 glass-dark flex flex-col p-6 shadow-2xl">
               <div className="flex items-center justify-between mb-8">
-                <span className="font-black text-white text-xl">IPCI <span className="gradient-text-green">2027</span></span>
+                <img src="/ipci2027Logo.png" alt="IPCI 2027 Logo" className="h-10 w-auto object-contain brightness-0 invert" />
                 <button onClick={() => setOpen(false)} className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-colors" aria-label="Close menu">
                   <X size={20} className="text-white" />
                 </button>
@@ -868,13 +862,7 @@ function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-sky-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                <span className="text-white font-black text-sm">IP</span>
-              </div>
-              <div>
-                <p className="font-black text-2xl tracking-tight">IPCI <span className="gradient-text-green">2027</span></p>
-                <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-widest">International Pancreatitis Conclave India</p>
-              </div>
+              <img src="/ipci2027Logo.png" alt="IPCI 2027 Logo" className="h-16 w-auto object-contain brightness-0 invert" />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Bridging Evidence, Innovation and Integrative Care in Pancreatitis.
