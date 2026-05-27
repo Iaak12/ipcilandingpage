@@ -385,44 +385,42 @@ function AboutSection() {
           {/* Right: Vaidya Balendu Prakash */}
           <motion.div variants={scaleIn}>
             <div className="relative">
-              <div className="glass rounded-3xl p-8 shadow-2xl shadow-emerald-100 border border-emerald-50 relative overflow-hidden">
-                {/* Decorative circle */}
-                <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-gradient-to-br from-emerald-100 to-sky-100 opacity-60 pointer-events-none" />
-
-                <div className="relative z-10">
-                  {/* Header badge */}
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 px-4 py-2 rounded-full mb-5">
-                    <Award size={15} className="text-amber-500" />
-                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">Padma Shri Awardee</span>
+              {/* Glow ring behind card */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-300/30 to-sky-300/20 blur-2xl scale-105 pointer-events-none" />
+              <div className="relative glass rounded-3xl shadow-2xl shadow-emerald-100 border border-emerald-50 overflow-hidden">
+                {/* Photo area */}
+                <div className="relative h-72 sm:h-80 overflow-hidden">
+                  <img src="/Vd BP.webp" alt="Padma Shri Vaidya Balendu Prakash" className="w-full h-full object-cover object-top" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E4A]/90 via-[#0B1E4A]/30 to-transparent" />
+                  <div className="absolute top-4 right-4 flex items-center gap-2 bg-amber-400/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+                    <Award size={13} className="text-amber-900" />
+                    <span className="text-[11px] font-black text-amber-900 uppercase tracking-wider">Padma Shri</span>
                   </div>
-
-                  {/* Avatar placeholder */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 to-sky-500 flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-emerald-200 shrink-0 pulse-ring">
-                      VB
-                    </div>
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-black text-[#0B1E4A] leading-tight">Vaidya Balendu Prakash</h3>
-                      <p className="text-emerald-600 font-semibold text-sm">Renowned Ayurvedic Physician</p>
-                      <p className="text-slate-500 text-xs font-medium mt-0.5">50+ Years of Clinical Experience</p>
-                    </div>
+                  <div className="absolute bottom-0 left-0 right-0 px-6 pb-5">
+                    <p className="text-[11px] font-bold text-emerald-300 uppercase tracking-widest mb-1">An Exclusive Interaction with</p>
+                    <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-lg">Vaidya Balendu Prakash</h3>
+                    <p className="text-emerald-300 font-semibold text-sm mt-0.5">Renowned Ayurvedic Physician</p>
                   </div>
-
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
-                    Padma Shri Awardee with 50+ years of clinical experience in integrative management of pancreatitis and metabolic disorders. A pioneer in bridging Ayurvedic wisdom with modern clinical practice.
+                </div>
+                {/* Info below photo */}
+                <div className="p-6 relative">
+                  <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-emerald-100/40 blur-2xl pointer-events-none" />
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-50 to-sky-50 border border-emerald-200 px-4 py-2 rounded-full mb-4 shadow-sm">
+                    <Star size={13} className="text-emerald-500 fill-emerald-400" />
+                    <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">50+ Years of Clinical Experience</span>
+                  </div>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-5">
+                    Padma Shri Awardee with over 50 years of clinical experience in integrative management of pancreatitis and metabolic disorders. A pioneer in bridging Ayurvedic wisdom with modern evidence-based clinical practice.
                   </p>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-3 mb-5">
                     {[{ num: '50+', label: 'Years Exp.' }, { num: '10K+', label: 'Patients' }, { num: 'Padma Shri', label: 'Awardee' }].map(({ num, label }, i) => (
-                      <div key={i} className="text-center p-3 rounded-xl glass-green">
+                      <div key={i} className="text-center p-3 rounded-xl glass-green border border-emerald-100">
                         <p className="font-black text-[#0B1E4A] text-lg leading-none">{num}</p>
                         <p className="text-[10px] font-semibold text-slate-500 mt-1 uppercase tracking-wide">{label}</p>
                       </div>
                     ))}
                   </div>
-
-                  <blockquote className="mt-5 p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-sky-50 border border-emerald-100 text-sm text-slate-700 italic font-medium leading-relaxed">
+                  <blockquote className="p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-sky-50 border-l-4 border-emerald-400 text-sm text-slate-700 italic font-medium leading-relaxed">
                     "Together, let us create a movement towards evidence, innovation and integrative care for a pancreatitis-free future."
                   </blockquote>
                 </div>
@@ -434,6 +432,7 @@ function AboutSection() {
     </section>
   );
 }
+
 
 // ─── OBJECTIVES SECTION ──────────────────────────────────────────────────────
 
