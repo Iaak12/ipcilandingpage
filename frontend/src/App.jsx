@@ -906,8 +906,11 @@ function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex flex-wrap items-center gap-6 mb-4">
               <img src="/ipci2027Logo.png" alt="IPCI 2027 Logo" className="h-16 w-auto object-contain brightness-0 invert" />
+              <a href="https://conferencealerts.co.in/" target="_blank" rel="noopener noreferrer" className="block hover:opacity-90 transition-opacity">
+                <img src="/Conference%20Alerts%20(1).png" alt="Conference Alerts" className="h-12 w-auto object-contain bg-white/95 px-2 py-1.5 rounded-lg shadow-sm" />
+              </a>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Bridging Evidence, Innovation and Integrative Care in Pancreatitis.
