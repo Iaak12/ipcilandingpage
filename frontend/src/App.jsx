@@ -762,7 +762,7 @@ function FAQSection() {
 function AdvisoryBoardSection() {
   const [ref, inView] = useInView(0.1);
   return (
-    <section id="guests" ref={ref} className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white relative">
+    <section id="guests" ref={ref} className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white relative min-h-[400px]">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
           <motion.div variants={fadeUp} className="text-center mb-14">
@@ -772,10 +772,10 @@ function AdvisoryBoardSection() {
             </h2>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 min-h-[200px]">
             {ADVISORY_BOARD.map((member) => (
-              <motion.div key={member.id} variants={fadeUp} className="w-full max-w-[380px] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300">
-                <img src={member.image} alt={member.name} className="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500" />
+              <motion.div key={member.id} variants={fadeUp} className="w-full max-w-[320px] bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300">
+                <img src={member.image} alt={member.name} className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-500" />
               </motion.div>
             ))}
           </div>
