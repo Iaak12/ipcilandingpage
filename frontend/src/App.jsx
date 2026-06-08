@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import {
   CalendarDays, MapPin, Mail, Phone, ArrowRight, Menu, X,
   Microscope, Leaf, Stethoscope, Globe, Users, BookOpen,
   ChevronDown, CheckCircle, Star, Award, HeartPulse, FlaskConical,
   Lightbulb, Target, TrendingUp, Building, GraduationCap, Shield,
   Activity, Brain, Pill, Salad, Dna, ExternalLink, Send,
-  Handshake, FileText, Droplet, Quote
+  Handshake, FileText, Droplet, Quote, Loader2
 } from 'lucide-react';
+
+const WEB3FORMS_ACCESS_KEY = "045af9f2-df45-4afd-bacb-f59ed567d070";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -795,6 +798,7 @@ function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const validate = () => {
     const e = {};
@@ -805,12 +809,45 @@ function ContactSection() {
     return e;
   };
 
-  const handleSubmit = (ev) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
     const errs = validate();
+    if (!captchaToken) errs.captcha = "Please verify that you are human.";
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setErrors({});
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    const formData = new FormData();
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append("h-captcha-response", captchaToken);
+    formData.append("subject", "New Registration / Inquiry for IPCI 2027");
+    formData.append("from_name", "IPCI 2027 Website");
+    formData.append("Name", form.name);
+    formData.append("Email", form.email);
+    formData.append("Phone", form.phone);
+    formData.append("Profession", form.profession);
+    if (form.message.trim()) {
+      formData.append("Message", form.message);
+    }
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setErrors({});
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong: " + data.message);
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -871,7 +908,7 @@ function ContactSection() {
                     </div>
                     <h3 className="text-2xl font-black text-[#0B1E4A] mb-3">Thank You!</h3>
                     <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your interest has been registered. We'll be in touch with more details about IPCI 2027 soon.</p>
-                    <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', profession: '', message: '' }); }}
+                    <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', profession: '', message: '' }); setCaptchaToken(""); }}
                       className="btn-outline mt-6 mx-auto">Submit Another</button>
                   </motion.div>
                 ) : (
@@ -903,9 +940,18 @@ function ContactSection() {
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 resize-none" />
                     </div>
 
-                    <button type="submit" className="btn-primary w-full justify-center py-4 text-base">
-                      <Send size={17} />
-                      Submit Registration
+                    <div className="flex flex-col gap-1.5 items-center justify-center my-2">
+                      <HCaptcha
+                        sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                        onVerify={(token) => { setCaptchaToken(token); setErrors((prev) => ({...prev, captcha: null})); }}
+                        onExpire={() => setCaptchaToken("")}
+                      />
+                      {errors.captcha && <p className="text-xs text-red-500 font-medium text-center">{errors.captcha}</p>}
+                    </div>
+
+                    <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed">
+                      {isSubmitting ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+                      {isSubmitting ? 'Submitting...' : 'Submit Registration'}
                     </button>
                     <p className="text-center text-xs text-slate-400">
                       By submitting, you agree to be contacted about IPCI 2027.
