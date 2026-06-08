@@ -18,11 +18,7 @@ const ADVISORY_BOARD = [
   {
     id: 1,
     name: "Prof. Dr. Asbjørn Mohr Drewes",
-    country: "Denmark",
-    role: "Member, International Advisory Board",
-    description: "Prof. Drewes is a distinguished gastroenterologist, pancreatologist and pain researcher whose pioneering work in pancreatic pain, chronic pancreatitis and neurogastroenterology has advanced global knowledge and patient care.",
-    image: "/guest1.jpeg",
-    welcomeMessage: "We warmly welcome Prof. Drewes to the IPCI family and look forward to his invaluable guidance and support in making IPCI 2027 a landmark global event in pancreatology."
+    image: "/guest1.jpeg"
   }
 ];
 
@@ -776,46 +772,10 @@ function AdvisoryBoardSection() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 justify-center">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8 justify-center">
             {ADVISORY_BOARD.map((member) => (
-              <motion.div key={member.id} variants={fadeUp} className="bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col group relative">
-                
-                {/* Header Banner */}
-                <div className="bg-[#0B1E4A] p-4 sm:p-5 text-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent opacity-30"></div>
-                  <h4 className="text-sky-300 text-xs sm:text-sm font-bold uppercase tracking-widest mb-1 relative z-10">Global Pancreatology Leader</h4>
-                  <h3 className="text-white text-sm sm:text-base font-semibold tracking-wider relative z-10">Joins IPCI 2027 <span className="text-emerald-400">{member.role}</span></h3>
-                </div>
-
-                <div className="p-6 sm:p-8 flex flex-col sm:flex-row gap-6 sm:gap-8 relative flex-1">
-                  {/* Image */}
-                  <div className="shrink-0 mx-auto sm:mx-0">
-                    <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full border-4 border-emerald-50 overflow-hidden shadow-lg shadow-emerald-100/50 relative">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
-                      <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] pointer-events-none"></div>
-                    </div>
-                  </div>
-
-                  {/* Info */}
-                  <div className="flex-1 text-center sm:text-left flex flex-col">
-                    <div className="inline-flex items-center gap-1.5 justify-center sm:justify-start text-emerald-600 font-bold text-xs uppercase tracking-widest mb-3 bg-emerald-50 px-3 py-1.5 rounded-full w-fit mx-auto sm:mx-0">
-                      <MapPin size={12} /> {member.country}
-                    </div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-[#0B1E4A] mb-3 leading-tight">{member.name}</h3>
-                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 flex-1">
-                      {member.description}
-                    </p>
-                    
-                    <div className="mt-auto bg-gradient-to-r from-emerald-50 to-sky-50 rounded-2xl p-4 sm:p-5 border border-emerald-100/50 flex gap-3 sm:gap-4 items-start relative overflow-hidden">
-                      <Handshake size={24} className="text-emerald-500 shrink-0 mt-0.5 relative z-10" />
-                      <p className="text-xs sm:text-sm text-[#0B1E4A] font-medium leading-relaxed italic relative z-10">
-                        {member.welcomeMessage}
-                      </p>
-                      <Quote size={80} className="absolute -right-4 -bottom-4 text-emerald-500/5 rotate-12" />
-                    </div>
-                  </div>
-                </div>
-
+              <motion.div key={member.id} variants={fadeUp} className="rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300">
+                <img src={member.image} alt={member.name} className="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500" />
               </motion.div>
             ))}
           </div>
