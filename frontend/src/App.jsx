@@ -772,9 +772,9 @@ function AdvisoryBoardSection() {
             </h2>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8 justify-center">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
             {ADVISORY_BOARD.map((member) => (
-              <motion.div key={member.id} variants={fadeUp} className="rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300">
+              <motion.div key={member.id} variants={fadeUp} className="w-full max-w-[380px] rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300">
                 <img src={member.image} alt={member.name} className="w-full h-auto object-contain hover:scale-[1.02] transition-transform duration-500" />
               </motion.div>
             ))}
