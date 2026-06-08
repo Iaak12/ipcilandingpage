@@ -5,18 +5,43 @@ import {
   Microscope, Leaf, Stethoscope, Globe, Users, BookOpen,
   ChevronDown, CheckCircle, Star, Award, HeartPulse, FlaskConical,
   Lightbulb, Target, TrendingUp, Building, GraduationCap, Shield,
-  Activity, Brain, Pill, Salad, Dna, ExternalLink, Send
+  Activity, Brain, Pill, Salad, Dna, ExternalLink, Send,
+  Handshake, FileText, Droplet, Quote
 } from 'lucide-react';
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
+  { label: 'Vision', href: '#vision-aim' },
+  { label: 'Themes', href: '#themes' },
   { label: 'Objectives', href: '#objectives' },
   { label: 'Scope', href: '#scope' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Participants', href: '#participants' },
   { label: 'Contact', href: '#contact' },
+];
+
+const VISION = "To create a collaborative national and international platform that promotes scientific dialogue, clinical learning, innovation, and evidence-oriented integrative approaches for pancreatitis care.";
+const AIM = "To encourage meaningful interaction between modern medicine, Ayurveda, translational science, and patient-centered healthcare systems for improving the understanding and management of pancreatitis.";
+
+const THEMES = [
+  { icon: HeartPulse, label: 'Acute & Chronic Pancreatitis' },
+  { icon: Salad, label: 'Nutrition & Lifestyle' },
+  { icon: Activity, label: 'Pain & Quality of Life' },
+  { icon: Droplet, label: 'Pancreatitis Associated Diabetes' },
+  { icon: FileText, label: 'Clinical Documentation & Audit' },
+  { icon: Microscope, label: 'Translational Research' },
+  { icon: Leaf, label: 'Integrative & Evidence-Oriented Healthcare' },
+  { icon: Users, label: 'Patient-Centered Long-Term Care' },
+  { icon: Lightbulb, label: 'Future Research Directions' },
+];
+
+const HOW_IT_WORKS = [
+  { icon: Users, title: 'Knowledge Sharing', desc: 'Through scientific lectures, panel discussions and case studies' },
+  { icon: Handshake, title: 'Collaboration', desc: 'Building networks for future research and partnerships' },
+  { icon: FileText, title: 'Evidence Building', desc: 'Encouraging documentation, clinical audit and research' },
+  { icon: Target, title: 'Action & Impact', desc: 'Translating discussions into better patient care and public health impact' },
 ];
 
 const AT_A_GLANCE = [
@@ -66,10 +91,10 @@ const NEEDS = [
 ];
 
 const OUTCOMES = [
+  { category: 'General', icon: Target, color: 'emerald', items: ['Strengthen academic collaboration & scientific transparency', 'Promote evidence-building initiatives', 'Inspire young researchers', 'Encourage responsible integrative healthcare dialogue'] },
   { category: 'Academic', icon: BookOpen, color: 'sky', items: ['Publication of conference proceedings & abstracts', 'Development of collaborative research proposals', 'Formation of expert working groups', 'Recommendations for future multicentric studies'] },
-  { category: 'Clinical', icon: Stethoscope, color: 'green', items: ['Improved awareness on integrative pancreatitis care', 'Better understanding of lifestyle-linked etiological factors', 'Promotion of evidence-oriented therapeutic approaches'] },
-  { category: 'Research', icon: FlaskConical, color: 'purple', items: ['Initiation of clinical audit & fellowship programs', 'Better understanding of data collection & patient registries', 'Encouragement for translational & interdisciplinary research'] },
-  { category: 'Societal', icon: Users, color: 'orange', items: ['Improved patient awareness and empowerment', 'Reduction in stigma and misconceptions', 'Promotion of transparent and evidence-based healthcare communication'] },
+  { category: 'Clinical', icon: Stethoscope, color: 'green', items: ['Improved patient-centered understanding', 'Better understanding of lifestyle-linked etiological factors', 'Promotion of evidence-oriented therapeutic approaches'] },
+  { category: 'Research', icon: FlaskConical, color: 'purple', items: ['Build future research networks', 'Initiation of clinical audit & fellowship programs', 'Encouragement for translational & interdisciplinary research'] },
 ];
 
 const FAQS = [
@@ -86,18 +111,18 @@ const FAQS = [
 ];
 
 const PARTICIPANTS = [
-  { icon: Stethoscope, label: 'Gastroenterologists' },
-  { icon: Activity, label: 'Pancreatic Surgeons' },
+  { icon: Stethoscope, label: 'Medical Doctors & Specialists' },
   { icon: Leaf, label: 'Ayurvedic Physicians' },
-  { icon: Microscope, label: 'Medical Researchers' },
-  { icon: Salad, label: 'Nutritionists' },
+  { icon: Activity, label: 'Gastroenterologists & Surgeons' },
+  { icon: Microscope, label: 'Researchers & Scientists' },
+  { icon: Salad, label: 'Nutrition Experts' },
+  { icon: GraduationCap, label: 'Medical Students & Scholars' },
+  { icon: Building, label: 'Healthcare Institutions' },
+  { icon: Globe, label: 'NGOs & Policy Makers' },
+  { icon: Users, label: 'Patients & Caregivers' },
   { icon: Pill, label: 'Pharmacologists' },
   { icon: HeartPulse, label: 'Public Health Experts' },
-  { icon: GraduationCap, label: 'Medical Students' },
-  { icon: Globe, label: 'International Delegates' },
   { icon: FlaskConical, label: 'Biotechnology Experts' },
-  { icon: Users, label: 'Patient Support Groups' },
-  { icon: Brain, label: 'Policymakers' },
 ];
 
 // ─── HOOKS ───────────────────────────────────────────────────────────────────
@@ -284,6 +309,9 @@ function HeroSection() {
           <p className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0B1E4A] uppercase tracking-widest mb-3 mt-2">
             International Pancreatitis Conclave India
           </p>
+          <p className="text-sm sm:text-base font-bold text-emerald-600 uppercase tracking-widest mb-4">
+            INNOVATE • PARTNER • COLLABORATE • IMPACT
+          </p>
           <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed mb-2 italic">
             "Bridging Evidence, Innovation and Integrative Care in Pancreatitis"
           </p>
@@ -298,7 +326,7 @@ function HeroSection() {
           </div>
           <div className="flex items-center gap-2.5 glass px-5 py-3 rounded-2xl shadow-sm">
             <MapPin size={20} className="text-sky-500 shrink-0" />
-            <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Rudrapur, Uttarakhand, India</span>
+            <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Gandhi Hall, Pantnagar University, Uttarakhand, India</span>
           </div>
         </motion.div>
 
@@ -434,6 +462,7 @@ function AboutSection() {
                     <p className="text-[11px] font-bold text-emerald-300 uppercase tracking-widest mb-1">An Exclusive Interaction with</p>
                     <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-lg">Vaidya Balendu Prakash</h3>
                     <p className="text-emerald-300 font-semibold text-sm mt-0.5">Renowned Ayurvedic Physician</p>
+                    <p className="text-white/80 font-medium text-xs mt-0.5">Prof of Practise</p>
                   </div>
                 </div>
                 {/* Info below photo */}
@@ -444,10 +473,10 @@ function AboutSection() {
                     <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">50+ Years of Clinical Experience</span>
                   </div>
                   <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                    Padma Shri Awardee with over 50 years of clinical experience in integrative management of pancreatitis and metabolic disorders. A pioneer in bridging Ayurvedic wisdom with modern evidence-based clinical practice.
+                    Padmashree Awardee (Year 1999) with over 50 years of clinical experience in integrative management of pancreatitis and metabolic disorders. A pioneer in bridging Ayurvedic wisdom with modern evidence-based clinical practice.
                   </p>
                   <div className="grid grid-cols-3 gap-3 mb-5">
-                    {[{ num: '50+', label: 'Years Exp.' }, { num: '10K+', label: 'Patients' }, { num: 'Padma Shri', label: 'Awardee' }].map(({ num, label }, i) => (
+                    {[{ num: '50+', label: 'Years Exp.' }, { num: '10K+', label: 'Patients' }, { num: '1999', label: 'Padmashree' }].map(({ num, label }, i) => (
                       <div key={i} className="text-center p-3 rounded-xl glass-green border border-emerald-100">
                         <p className="font-black text-[#0B1E4A] text-lg leading-none">{num}</p>
                         <p className="text-[10px] font-semibold text-slate-500 mt-1 uppercase tracking-wide">{label}</p>
@@ -806,8 +835,8 @@ function ContactSection() {
             <motion.div variants={fadeUp} className="lg:col-span-2 space-y-5">
               {[
                 { icon: Phone, label: 'Phone', lines: ['+91 98370 28544', '+91 79833 92736'], href: 'tel:+919837028544' },
-                { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in'], href: 'mailto:info@ipci2027.co.in' },
-                { icon: MapPin, label: 'Venue', lines: ['Rudrapur, Uttarakhand, India', '12–14 February 2027'], href: null },
+                { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'balenduprakash@gmail.com'], href: 'mailto:info@ipci2027.co.in' },
+                { icon: MapPin, label: 'Venue', lines: ['Gandhi Hall, Pantnagar University', 'Uttarakhand, India', '12–14 February 2027'], href: null },
                 { icon: Globe, label: 'Website', lines: ['www.ipci2027.co.in'], href: 'https://www.ipci2027.co.in' },
               ].map(({ icon: Icon, label, lines, href }, i) => (
                 <motion.div key={i} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}
@@ -903,6 +932,26 @@ function Footer() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+        {/* Important Message Banner */}
+        <div className="mb-12 bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur-sm text-center">
+          <Quote size={32} className="mx-auto text-emerald-400 mb-4 opacity-50" />
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 leading-tight">
+            IPCI 2027 believes that meaningful healthcare advancement requires:
+          </h3>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-emerald-100 text-sm sm:text-base font-medium">
+            <span>Collaboration instead of isolation</span> <span className="hidden sm:inline opacity-30">•</span>
+            <span>Scientific curiosity instead of rigid boundaries</span> <span className="hidden sm:inline opacity-30">•</span>
+            <span>Transparent documentation instead of assumptions</span> <span className="hidden sm:inline opacity-30">•</span>
+            <span>Patient-centered care instead of system-centered approaches.</span>
+          </div>
+          <div className="mt-8 pt-6 border-t border-white/10 flex justify-center gap-4 sm:gap-8 flex-wrap">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 font-black tracking-widest uppercase text-sm sm:text-base">Science</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 font-black tracking-widest uppercase text-sm sm:text-base">Collaboration</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 font-black tracking-widest uppercase text-sm sm:text-base">Compassion</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400 font-black tracking-widest uppercase text-sm sm:text-base">A Better Tomorrow</span>
+          </div>
+        </div>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Brand */}
           <div className="lg:col-span-2">
@@ -955,7 +1004,7 @@ function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={13} className="text-emerald-400 shrink-0 mt-0.5" />
-                <span>Rudrapur, Uttarakhand, India</span>
+                <span>Gandhi Hall, Pantnagar University,<br/>Uttarakhand, India</span>
               </li>
             </ul>
           </div>
@@ -1009,6 +1058,114 @@ function FloatingActions() {
   );
 }
 
+// ─── VISION & AIM SECTION ────────────────────────────────────────────────────
+
+function VisionAimSection() {
+  const [ref, inView] = useInView(0.15);
+  return (
+    <section id="vision-aim" ref={ref} className="py-20 px-4 bg-gradient-to-b from-emerald-50/40 to-white">
+      <div className="max-w-6xl mx-auto">
+        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="grid md:grid-cols-2 gap-8">
+          {/* Vision */}
+          <motion.div variants={fadeUp} className="glass rounded-3xl p-8 sm:p-10 border border-white shadow-xl shadow-sky-50/50 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-sky-400/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center mb-6 shadow-lg shadow-sky-200 text-white">
+              <Globe size={28} />
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#0B1E4A] mb-4">Our Vision</h3>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+              {VISION}
+            </p>
+          </motion.div>
+          {/* Aim */}
+          <motion.div variants={fadeUp} className="glass-green rounded-3xl p-8 sm:p-10 border border-emerald-100 shadow-xl shadow-emerald-50/50 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-400/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center mb-6 shadow-lg shadow-emerald-200 text-white">
+              <Target size={28} />
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#0B1E4A] mb-4">Our Aim</h3>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+              {AIM}
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── THEMES SECTION ──────────────────────────────────────────────────────────
+
+function ThemesSection() {
+  const [ref, inView] = useInView(0.1);
+  return (
+    <section id="themes" ref={ref} className="py-20 bg-[#0B1E4A] relative overflow-hidden px-4">
+      {/* Decorative */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-sky-500/10 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+          <motion.div variants={fadeUp} className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-emerald-300 text-xs font-bold uppercase tracking-widest mb-4">
+              <Lightbulb size={14} /> Key Focus Areas
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-black text-white mt-2">
+              Key Themes of the <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400">Conclave</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {THEMES.map(({ icon: Icon, label }, i) => (
+              <motion.div key={i} variants={fadeUp} whileHover={{ y: -5 }} className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-6 transition-all backdrop-blur-sm group flex items-center gap-5">
+                <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-400 group-hover:text-white transition-colors shrink-0">
+                  <Icon size={22} />
+                </div>
+                <h4 className="text-white font-semibold text-base sm:text-lg leading-snug">{label}</h4>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── HOW IT WORKS SECTION ────────────────────────────────────────────────────
+
+function HowItWorksSection() {
+  const [ref, inView] = useInView(0.1);
+  return (
+    <section className="py-20 px-4 bg-white relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+          <motion.div variants={fadeUp} className="text-center mb-14">
+            <SectionTag icon={Activity}>The Process</SectionTag>
+            <h2 className="text-4xl sm:text-5xl font-black text-[#0B1E4A] mt-2">
+              How IPCI 2027 <span className="gradient-text-green">Works</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {HOW_IT_WORKS.map(({ icon: Icon, title, desc }, i) => (
+              <motion.div key={i} variants={fadeUp} className="glass rounded-3xl p-6 border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-50 to-sky-50 rounded-bl-full -mr-8 -mt-8 opacity-50" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-sky-400 flex items-center justify-center text-white mb-5 shadow-lg shadow-emerald-200">
+                  <Icon size={20} />
+                </div>
+                <h3 className="text-xl font-black text-[#0B1E4A] mb-3">{title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-medium">{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ─── APP ROOT ─────────────────────────────────────────────────────────────────
 
 function App() {
@@ -1017,7 +1174,10 @@ function App() {
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <VisionAimSection />
+      <ThemesSection />
       <ObjectivesSection />
+      <HowItWorksSection />
       <ScopeSection />
       <NeedOutcomesSection />
       <FAQSection />
