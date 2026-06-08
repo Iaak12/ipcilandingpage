@@ -1220,7 +1220,7 @@ function ThemesSection() {
 function HowItWorksSection() {
   const [ref, inView] = useInView(0.1);
   return (
-    <section className="py-20 px-4 bg-white relative">
+    <section ref={ref} className="py-20 px-4 bg-white relative">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
           <motion.div variants={fadeUp} className="text-center mb-14">
