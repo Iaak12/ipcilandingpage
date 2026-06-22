@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { Link } from 'react-router-dom';
 import {
   CalendarDays, MapPin, Mail, Phone, ArrowRight, Menu, X,
   Microscope, Leaf, Stethoscope, Globe, Users, BookOpen,
@@ -242,9 +243,9 @@ function Navbar() {
 
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a href="#contact" onClick={(e) => { e.preventDefault(); handleLinkClick('#contact'); }} className="btn-primary text-sm py-2.5 px-5">
+            <Link to="/register" className="btn-primary text-sm py-2.5 px-5">
               Register Interest <ArrowRight size={15} />
-            </a>
+            </Link>
           </div>
 
           {/* Hamburger */}
@@ -277,9 +278,9 @@ function Navbar() {
                   </a>
                 ))}
               </nav>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); handleLinkClick('#contact'); setOpen(false); }} className="btn-primary mt-4 justify-center">
+              <Link to="/register" onClick={() => setOpen(false)} className="btn-primary mt-4 justify-center">
                 Register Interest <ArrowRight size={16} />
-              </a>
+              </Link>
             </motion.div>
           </>
         )}
@@ -358,10 +359,9 @@ function HeroSection() {
         {/* CTAs */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-          <a href="#contact" onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="btn-primary text-base px-8 py-4 justify-center">
+          <Link to="/register" className="btn-primary text-base px-8 py-4 justify-center">
             Register Interest <ArrowRight size={18} />
-          </a>
+          </Link>
           <a href="#scope" onClick={(e) => { e.preventDefault(); document.querySelector('#scope')?.scrollIntoView({ behavior: 'smooth' }); }}
             className="btn-outline text-base px-8 py-4 justify-center">
             View Agenda <BookOpen size={18} />
