@@ -251,10 +251,9 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <Link to="/register" className="btn-primary text-sm py-2.5 px-5">
-              Register Interest <ArrowRight size={15} />
+              Register Now <ArrowRight size={15} />
             </Link>
           </div>
 
@@ -289,7 +288,7 @@ export function Navbar() {
                 ))}
               </nav>
               <Link to="/register" onClick={() => setOpen(false)} className="btn-primary mt-4 justify-center">
-                Register Interest <ArrowRight size={16} />
+                Register Now <ArrowRight size={16} />
               </Link>
             </motion.div>
           </>
@@ -366,11 +365,10 @@ function HeroSection() {
           </div>
         </motion.div>
 
-        {/* CTAs */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
           <Link to="/register" className="btn-primary text-base px-8 py-4 justify-center">
-            Register Interest <ArrowRight size={18} />
+            Register Now <ArrowRight size={18} />
           </Link>
           <a href="#scope" onClick={(e) => { e.preventDefault(); document.querySelector('#scope')?.scrollIntoView({ behavior: 'smooth' }); }}
             className="btn-outline text-base px-8 py-4 justify-center">
