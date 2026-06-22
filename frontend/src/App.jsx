@@ -11,6 +11,8 @@ import {
   Handshake, FileText, Droplet, Quote, Loader2
 } from 'lucide-react';
 
+import SponsorsSection from './SponsorsSection.jsx';
+
 const WEB3FORMS_ACCESS_KEY = "045af9f2-df45-4afd-bacb-f59ed567d070";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -31,6 +33,7 @@ export const NAV_LINKS = [
   { label: 'Scope', href: '#scope' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Participants', href: '#participants' },
+  { label: 'Sponsors', href: '#sponsors' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -1289,6 +1292,7 @@ function App() {
       <FAQSection />
       <AdvisoryBoardSection />
       <ParticipantsSection />
+      <SponsorsSection />
       <ContactSection />
       <Footer />
       <FloatingActions />
