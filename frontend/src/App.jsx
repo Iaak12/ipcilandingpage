@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   CalendarDays, MapPin, Mail, Phone, ArrowRight, Menu, X,
   Microscope, Leaf, Stethoscope, Globe, Users, BookOpen,
@@ -23,7 +23,7 @@ const ADVISORY_BOARD = [
   }
 ];
 
-const NAV_LINKS = [
+export const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Vision', href: '#vision-aim' },
   { label: 'Themes', href: '#themes' },
@@ -204,9 +204,11 @@ function CountdownUnit({ value, label }) {
 
 // ─── NAVBAR ──────────────────────────────────────────────────────────────────
 
-function Navbar() {
+export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -216,6 +218,14 @@ function Navbar() {
 
   const handleLinkClick = (href) => {
     setOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return;
+    }
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
@@ -1005,7 +1015,23 @@ function ContactSection() {
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
 
-function Footer() {
+export function Footer() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleFooterLinkClick = (e, href) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return;
+    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-[#0B1E4A] text-white relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -1059,7 +1085,7 @@ function Footer() {
             <ul className="space-y-2">
               {NAV_LINKS.map(({ label, href }) => (
                 <li key={href}>
-                  <a href={href} onClick={(e) => { e.preventDefault(); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); }}
+                  <a href={href} onClick={(e) => handleFooterLinkClick(e, href)}
                     className="text-slate-400 hover:text-emerald-400 text-sm font-medium transition-colors">
                     {label}
                   </a>

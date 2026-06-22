@@ -1,33 +1,81 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { Navbar, Footer } from './App.jsx';
 import {
   CalendarDays, MapPin, ArrowLeft, ArrowRight,
   CheckCircle, Users, Award, FileText, Globe, Info,
-  Plane, Train, Car, Home, XCircle, AlertCircle, Sparkles, BookOpen
+  Plane, Train, Car, Home, XCircle, AlertCircle, Sparkles, BookOpen,
+  X, Loader2, Send
 } from 'lucide-react';
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 export default function Register() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = 'Name is required';
+    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Valid email required';
+    if (!form.phone.trim()) e.phone = 'Phone is required';
+    if (!form.profession.trim()) e.profession = 'Profession is required';
+    return e;
+  };
+
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    const errs = validate();
+    if (!captchaToken) errs.captcha = "Please verify that you are human.";
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+
+    setIsSubmitting(true);
+    const formData = new FormData();
+    formData.append("access_key", "045af9f2-df45-4afd-bacb-f59ed567d070");
+    formData.append("h-captcha-response", captchaToken);
+    formData.append("subject", "New Registration for IPCI 2027");
+    formData.append("from_name", "IPCI 2027 Website");
+    formData.append("Name", form.name);
+    formData.append("Email", form.email);
+    formData.append("Phone", form.phone);
+    formData.append("Profession", form.profession);
+    if (form.message.trim()) {
+      formData.append("Message", form.message);
+    }
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data.success) {
+        setErrors({});
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong: " + data.message);
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f0fdf9] font-sans">
-      {/* Navbar Minimal */}
-      <header className="fixed top-0 left-0 right-0 z-50 py-3 glass shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/ipci2027Logo.png" alt="IPCI 2027 Logo" className="h-10 w-auto object-contain" />
-          </Link>
-          <Link to="/" className="btn-outline text-sm py-2 px-4 flex items-center gap-2 border-emerald-200">
-            <ArrowLeft size={16} /> <span className="hidden sm:inline">Back to Home</span>
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 hero-mesh relative overflow-hidden">
@@ -87,7 +135,7 @@ export default function Register() {
                   </li>
                 ))}
               </ul>
-              <a href="#" className="w-full text-center py-3 rounded-xl font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Register Now</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Register Now</a>
             </div>
 
             {/* PG/PhD */}
@@ -101,7 +149,7 @@ export default function Register() {
                   </li>
                 ))}
               </ul>
-              <a href="#" className="w-full text-center py-3 rounded-xl font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Register Now</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Register Now</a>
             </div>
 
             {/* Delegate */}
@@ -116,7 +164,7 @@ export default function Register() {
                   </li>
                 ))}
               </ul>
-              <a href="#" className="w-full text-center py-3 rounded-xl font-bold bg-emerald-500 text-white hover:bg-emerald-600 transition-colors shadow-md">Register Now</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-emerald-500 text-white hover:bg-emerald-600 transition-colors shadow-md">Register Now</a>
             </div>
 
             {/* Delegate + Poster */}
@@ -132,7 +180,7 @@ export default function Register() {
                 <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Eligibility for Poster Awards</span></li>
                 <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Chance for 5-minute oral presentation</span></li>
               </ul>
-              <a href="#" className="w-full text-center py-3 rounded-xl font-bold bg-amber-400 text-amber-900 hover:bg-amber-300 transition-colors shadow-md">Register & Submit</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-amber-400 text-amber-900 hover:bg-amber-300 transition-colors shadow-md">Register & Submit</a>
             </div>
           </div>
         </div>
@@ -274,14 +322,83 @@ export default function Register() {
         </div>
       </section>
 
-      {/* Footer Minimal */}
-      <footer className="bg-[#0B1E4A] py-8 text-center border-t border-white/10">
-        <p className="text-slate-400 text-sm mb-2">© 2027 International Pancreatitis Conclave India. All rights reserved.</p>
-        <p className="text-slate-500 text-xs flex justify-center items-center gap-4">
-          <span>info@ipci2027.co.in</span>
-          <span>www.ipci2027.co.in</span>
-        </p>
-      </footer>
+      <Footer />
+
+      {/* Registration Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-[#0B1E4A]/80 backdrop-blur-sm" />
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass rounded-3xl p-6 sm:p-8 border border-white shadow-2xl shadow-emerald-900/50">
+              <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 p-2 rounded-xl hover:bg-slate-100 transition-colors z-10">
+                <X size={20} className="text-slate-500" />
+              </button>
+
+              {submitted ? (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-sky-500 flex items-center justify-center mx-auto mb-5 shadow-xl shadow-emerald-200">
+                    <CheckCircle size={36} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl font-black text-[#0B1E4A] mb-3">Thank You!</h3>
+                  <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your registration details have been received. We'll be in touch with you shortly.</p>
+                  <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', profession: '', message: '' }); setCaptchaToken(""); setIsModalOpen(false); }}
+                    className="btn-outline mt-6 mx-auto">Close</button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} noValidate className="space-y-5 mt-2">
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-black text-[#0B1E4A] mb-1">Register for IPCI 2027</h3>
+                    <p className="text-slate-500 text-sm">Please fill out your details below to complete your registration.</p>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {[
+                      { id: 'name', label: 'Full Name', type: 'text', placeholder: 'Dr. John Doe' },
+                      { id: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com' },
+                      { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 98XXX XXXXX' },
+                      { id: 'profession', label: 'Profession / Specialty', type: 'text', placeholder: 'Gastroenterologist' },
+                    ].map(({ id, label, type, placeholder }) => (
+                      <div key={id} className="flex flex-col gap-1.5">
+                        <label htmlFor={`reg-${id}`} className="text-xs font-bold text-slate-600 uppercase tracking-wider">{label}</label>
+                        <input id={`reg-${id}`} type={type} placeholder={placeholder} value={form[id]}
+                          onChange={(e) => setForm({ ...form, [id]: e.target.value })}
+                          className={`w-full px-4 py-3 rounded-xl border text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 ${errors[id] ? 'border-red-300 bg-red-50/40' : 'border-slate-200'}`} />
+                        {errors[id] && <p className="text-xs text-red-500 font-medium">{errors[id]}</p>}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="reg-message" className="text-xs font-bold text-slate-600 uppercase tracking-wider">Additional Message (Optional)</label>
+                    <textarea id="reg-message" rows={3} placeholder="Any specific requirements..."
+                      value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 resize-none" />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 items-center justify-center my-2">
+                    <HCaptcha
+                      sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                      onVerify={(token) => { setCaptchaToken(token); setErrors((prev) => ({...prev, captcha: null})); }}
+                      onExpire={() => setCaptchaToken("")}
+                    />
+                    {errors.captcha && <p className="text-xs text-red-500 font-medium text-center">{errors.captcha}</p>}
+                  </div>
+
+                  <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed">
+                    {isSubmitting ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+                    {isSubmitting ? 'Submitting...' : 'Confirm Registration'}
+                  </button>
+                  <p className="text-center text-xs text-slate-400">
+                    By submitting, you agree to the registration terms and conditions.
+                  </p>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
