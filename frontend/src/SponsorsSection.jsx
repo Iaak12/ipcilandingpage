@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Award, TrendingUp, Heart, Building, Users, GraduationCap, Star, ShieldCheck } from 'lucide-react';
+
+function useInView({ threshold = 0.15, triggerOnce = true } = {}) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { 
+      if (e.isIntersecting) {
+        setInView(true);
+        if (triggerOnce && ref.current) obs.unobserve(ref.current);
+      } else if (!triggerOnce) {
+        setInView(false);
+      }
+    }, { threshold });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold, triggerOnce]);
+  return [ref, inView];
+}
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
