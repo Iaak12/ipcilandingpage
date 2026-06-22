@@ -200,10 +200,12 @@ export default function Register() {
                 Participants registering under the <strong>"Delegate with Poster Presentation"</strong> category may submit their research findings for scientific review. Accepted abstracts will be presented as posters. All abstracts undergo peer review.
               </p>
               <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
-                <p className="text-sm text-amber-800 font-medium flex items-start gap-2">
-                  <Award size={18} className="shrink-0" />
-                  IPCI 2027 will recognize outstanding scientific contributions through the <strong>Best Five Poster Awards</strong> presented during the Valedictory Session.
-                </p>
+                <div className="text-sm text-amber-800 font-medium flex items-start gap-2">
+                  <Award size={18} className="shrink-0 mt-0.5" />
+                  <span>
+                    IPCI 2027 will recognize outstanding scientific contributions through the <strong>Best Five Poster Awards</strong> presented during the Valedictory Session.
+                  </span>
+                </div>
               </div>
             </div>
 
