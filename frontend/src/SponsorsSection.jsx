@@ -31,7 +31,7 @@ const SPONSORS = [
     icon: Award,
     color: "amber",
     items: [
-      { name: "VCPCRF Founders' Contribution", amount: "₹ 60,00,000/-", subtitle: "Vaidya Chandra Prakash Cancer Research Foundation" }
+      { name: "VCPCRF Founders' Contribution", amount: "₹ 60,00,000/-", subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/logos/vcpcrf.png" }
     ]
   },
   {
@@ -39,9 +39,9 @@ const SPONSORS = [
     icon: Building,
     color: "blue",
     items: [
-      { name: "Zandu Care", amount: "₹ 2,50,000/-", subtitle: "Silver Sponsor" },
-      { name: "Venus Pvt. Ltd.", amount: "₹ 50,000/-", subtitle: "VENUS" },
-      { name: "ND R.F.M.", amount: "₹ 31,000/-", subtitle: "" },
+      { name: "Zandu Care", amount: "₹ 2,50,000/-", subtitle: "Silver Sponsor", logo: "/logos/zandu.png" },
+      { name: "Venus Pvt. Ltd.", amount: "₹ 50,000/-", subtitle: "VENUS", logo: "/logos/venus.png" },
+      { name: "ND R.F.M.", amount: "₹ 31,000/-", subtitle: "", logo: "/logos/ndrfm.png" },
     ]
   },
   {
@@ -49,11 +49,11 @@ const SPONSORS = [
     icon: ShieldCheck,
     color: "rose",
     items: [
-      { name: "Atharva Ayurveda, Rajkot", amount: "₹ 1,50,000/-", subtitle: "" },
+      { name: "Atharva Ayurveda, Rajkot", amount: "₹ 1,50,000/-", subtitle: "", logo: "/logos/atharva.png" },
       { name: "Dr C K Katiyar, Gurugram", amount: "₹ 1,00,000/-", subtitle: "" },
       { name: "Prof (Dr) G. G. Gangadharan, Bangalore", amount: "₹ 1,00,000/-", subtitle: "" },
-      { name: "SL Ayucare Wellness Center, Rampur", amount: "₹ 50,000/-", subtitle: "" },
-      { name: "Dr. Anuj Jain, Gwalior", amount: "₹ 25,000/-", subtitle: "" },
+      { name: "SL Ayucare Wellness Center, Rampur", amount: "₹ 50,000/-", subtitle: "", logo: "/logos/sl-ayucare.png" },
+      { name: "Dr. Anuj Jain, Gwalior", amount: "₹ 25,000/-", subtitle: "", logo: "/logos/anuj-jain.png" },
       { name: "Vd Sonal, Mumbai", amount: "₹ 11,000/-", subtitle: "" },
       { name: "Dr Ravinder Amraik", amount: "₹ 11,000/-", subtitle: "" },
       { name: "Dr Surendra Singh, Barmer", amount: "₹ 5,100/-", subtitle: "" },
@@ -66,7 +66,7 @@ const SPONSORS = [
     icon: GraduationCap,
     color: "emerald",
     items: [
-      { name: "Uttaranchal Ayurvedic College", amount: "₹ 1,51,000/-", subtitle: "Dehradun" }
+      { name: "Uttaranchal Ayurvedic College", amount: "₹ 1,51,000/-", subtitle: "Dehradun", logo: "/logos/uttaranchal.png" }
     ]
   },
   {
@@ -84,7 +84,7 @@ export default function SponsorsSection() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
 
   return (
-    <section id="sponsors" ref={ref} className="py-24 px-4 bg-slate-50 relative overflow-hidden">
+    <section id="sponsors" ref={ref} className="pt-32 pb-24 px-4 bg-slate-50 relative overflow-hidden">
       {/* Decorative Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-amber-300/10 rounded-full blur-[100px]" />
@@ -165,15 +165,24 @@ export default function SponsorsSection() {
                   <div className={`flex flex-1 ${idx === 2 ? "flex-wrap lg:grid lg:grid-cols-2 gap-x-8" : "flex-col"} gap-y-5`}>
                     {category.items.map((item, i) => (
                       <div key={i} className={`flex items-start gap-4 ${idx === 2 ? "w-full" : "w-full"} group`}>
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border transition-colors
-                          ${category.color === 'amber' ? 'bg-amber-50 border-amber-200 text-amber-500 group-hover:bg-amber-100' : 
-                            category.color === 'blue' ? 'bg-blue-50 border-blue-200 text-blue-500 group-hover:bg-blue-100' : 
-                            category.color === 'emerald' ? 'bg-emerald-50 border-emerald-200 text-emerald-500 group-hover:bg-emerald-100' : 
-                            category.color === 'rose' ? 'bg-rose-50 border-rose-200 text-rose-500 group-hover:bg-rose-100' : 
-                            'bg-sky-50 border-sky-200 text-sky-500 group-hover:bg-sky-100'}`}>
-                          <Heart size={16} className={idx === 2 ? "fill-current" : ""} />
-                        </div>
-                        <div className="flex-1">
+                        {item.logo ? (
+                          <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center shrink-0 border border-slate-200 shadow-sm overflow-hidden p-1 group-hover:shadow-md group-hover:border-slate-300 transition-all">
+                            <img src={item.logo} alt={item.name} className="w-full h-full object-contain" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                            <div className="hidden w-full h-full items-center justify-center bg-slate-50 text-slate-400">
+                              <Heart size={20} />
+                            </div>
+                          </div>
+                        ) : (
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-colors
+                            ${category.color === 'amber' ? 'bg-amber-50 border-amber-200 text-amber-500 group-hover:bg-amber-100' : 
+                              category.color === 'blue' ? 'bg-blue-50 border-blue-200 text-blue-500 group-hover:bg-blue-100' : 
+                              category.color === 'emerald' ? 'bg-emerald-50 border-emerald-200 text-emerald-500 group-hover:bg-emerald-100' : 
+                              category.color === 'rose' ? 'bg-rose-50 border-rose-200 text-rose-500 group-hover:bg-rose-100' : 
+                              'bg-sky-50 border-sky-200 text-sky-500 group-hover:bg-sky-100'}`}>
+                            <Heart size={18} className={idx === 2 ? "fill-current opacity-50" : "opacity-50"} />
+                          </div>
+                        )}
+                        <div className="flex-1 mt-0.5">
                           <h5 className="font-bold text-[#0B1E4A] text-sm sm:text-base leading-snug mb-1">{item.name}</h5>
                           {item.subtitle && <p className="text-xs text-slate-500 font-semibold mb-1.5">{item.subtitle}</p>}
                           <p className={`font-black text-sm sm:text-lg 
