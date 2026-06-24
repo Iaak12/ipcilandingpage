@@ -325,7 +325,7 @@ export default function Register() {
               </div>
               
               {/* Attraction Boxes */}
-              <div className="flex overflow-x-auto gap-5 pb-6 pt-2 snap-x hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
+              <div className="flex overflow-x-auto gap-4 sm:gap-5 pb-6 pt-2 snap-x hide-scrollbar -mx-8 sm:-mx-12 px-8 sm:px-12" style={{ scrollbarWidth: 'none' }}>
                 <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
                 {[
                   { name: 'Nainital', km: '60 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Nainital_metro.jpg/500px-Nainital_metro.jpg' },
