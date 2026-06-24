@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
@@ -23,6 +23,21 @@ export default function Register() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        if (scrollLeft + clientWidth >= scrollWidth - 5) {
+          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollRef.current.scrollBy({ left: clientWidth * 0.8, behavior: 'smooth' });
+        }
+      }
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const validate = () => {
@@ -325,7 +340,7 @@ export default function Register() {
               </div>
               
               {/* Attraction Boxes */}
-              <div className="flex overflow-x-auto gap-4 sm:gap-5 pb-6 pt-2 snap-x hide-scrollbar -mx-8 sm:-mx-12 px-8 sm:px-12" style={{ scrollbarWidth: 'none' }}>
+              <div ref={scrollRef} className="flex overflow-x-auto gap-4 sm:gap-5 pb-6 pt-2 snap-x hide-scrollbar -mx-8 sm:-mx-12 px-8 sm:px-12 scroll-smooth" style={{ scrollbarWidth: 'none' }}>
                 <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
                 {[
                   { name: 'Nainital', km: '60 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Nainital_metro.jpg/500px-Nainital_metro.jpg' },
