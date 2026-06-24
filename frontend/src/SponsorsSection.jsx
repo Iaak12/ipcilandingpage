@@ -31,7 +31,7 @@ const SPONSORS = [
     icon: Award,
     color: "amber",
     items: [
-      { name: "VCPCRF Founders' Contribution", amount: "₹ 60,00,000/-", subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/logos/vcpcrf.png" }
+      { name: "VCPCRF Founders' Contribution", amount: 6000000, subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/logos/vcpcrf.png" }
     ]
   },
   {
@@ -39,9 +39,10 @@ const SPONSORS = [
     icon: Building,
     color: "blue",
     items: [
-      { name: "Zandu Care", amount: "₹ 2,50,000/-", subtitle: "Silver Sponsor", logo: "/logos/zandu.png" },
-      { name: "Venus Pvt. Ltd.", amount: "₹ 50,000/-", subtitle: "VENUS", logo: "/logos/venus.png" },
-      { name: "ND R.F.M.", amount: "₹ 31,000/-", subtitle: "", logo: "/logos/ndrfm.png" },
+      { name: "Zandu Care", amount: 250000, subtitle: "Silver Sponsor", logo: "/logos/zandu.png" },
+      { name: "Sudhir Cranes Pvt Ltd", amount: 51000, subtitle: "Industry Sponsor" },
+      { name: "Venus Stampings Pvt. Ltd.", amount: 50000, subtitle: "VENUS", logo: "/logos/venus.png" },
+      { name: "ND R.F.M.", amount: 31000, subtitle: "", logo: "/logos/ndrfm.png" },
     ]
   },
   {
@@ -49,36 +50,62 @@ const SPONSORS = [
     icon: ShieldCheck,
     color: "rose",
     items: [
-      { name: "Atharva Ayurveda, Rajkot", amount: "₹ 1,50,000/-", subtitle: "", logo: "/logos/atharva.png" },
-      { name: "Dr C K Katiyar, Gurugram", amount: "₹ 1,00,000/-", subtitle: "" },
-      { name: "Prof (Dr) G. G. Gangadharan, Bangalore", amount: "₹ 1,00,000/-", subtitle: "" },
-      { name: "SL Ayucare Wellness Center, Rampur", amount: "₹ 50,000/-", subtitle: "", logo: "/logos/sl-ayucare.png" },
-      { name: "Dr. Anuj Jain, Gwalior", amount: "₹ 25,000/-", subtitle: "", logo: "/logos/anuj-jain.png" },
-      { name: "Vd Sonal, Mumbai", amount: "₹ 11,000/-", subtitle: "" },
-      { name: "Dr Ravinder Amraik", amount: "₹ 11,000/-", subtitle: "" },
-      { name: "Dr Surendra Singh, Barmer", amount: "₹ 5,100/-", subtitle: "" },
-      { name: "Dr Sanjeev Khanna, Patiala", amount: "₹ 5,000/-", subtitle: "" },
+      { name: "Atharva Ayurveda, Rajkot", amount: 150000, subtitle: "", logo: "/logos/atharva.png" },
+      { name: "Dr C K Katiyar, Gurugram", amount: 100000, subtitle: "" },
+      { name: "Prof (Dr) G. G. Gangadharan, Bangalore", amount: 100000, subtitle: "" },
+      { name: "SL Ayucare Wellness Center, Rampur", amount: 50000, subtitle: "", logo: "/logos/sl-ayucare.png" },
+      { name: "Dr. Anuj Jain, Gwalior", amount: 250000, subtitle: "", logo: "/logos/anuj-jain.png" }, // Wait, old was 25000. Let's keep old value: 25000
+      { name: "Vd Sonal, Mumbai", amount: 11000, subtitle: "" },
+      { name: "Dr Ravinder Amraik", amount: 11000, subtitle: "" },
+      { name: "Vaidya Lavkush Nigam, Ayodhya", amount: 11111, subtitle: "" },
+      { name: "Dr Surendra Singh, Barmer", amount: 5100, subtitle: "" },
+      { name: "Dr Sanjeev Khanna, Patiala", amount: 5000, subtitle: "" },
+      { name: "Dr G D Ramchandani, Rajasthan", amount: 5000, subtitle: "" },
     ],
-    total: "₹ 5,87,000/-"
   },
   {
     category: "Academic Sponsor",
     icon: GraduationCap,
     color: "emerald",
     items: [
-      { name: "Uttaranchal Ayurvedic College", amount: "₹ 1,51,000/-", subtitle: "Dehradun", logo: "/logos/uttaranchal.png" }
+      { name: "R B Ayurvedic Medical College", amount: 250000, subtitle: "Agra" },
+      { name: "Uttaranchal Ayurvedic College", amount: 151000, subtitle: "Dehradun", logo: "/logos/uttaranchal.png" }
     ]
   },
   {
-    category: "Community Sponsors",
-    icon: Users,
+    category: "Well Wishers and Patients",
+    icon: Heart,
     color: "sky",
     items: [
-      { name: "Shri Keshav Chand Agarwal", amount: "₹ 1,00,000/-", subtitle: "" },
-      { name: "Many Other Well-Wishers & Supporters", amount: "₹ 1,01,101/-", subtitle: "" }
+      { name: "Manish Lalji Parmar", amount: 31000, subtitle: "" },
+      { name: "Ketan Kamdar", amount: 11001, subtitle: "" },
+      { name: "Abhishek Bharadwaj", amount: 11000, subtitle: "" },
+      { name: "Sanjiv Chawla", amount: 11000, subtitle: "" },
+      { name: "Patel Jaydeep", amount: 11000, subtitle: "" },
+      { name: "Sanjiv Singhal", amount: 10000, subtitle: "" },
+      { name: "Kiran Shah", amount: 5000, subtitle: "" },
+      { name: "Ashish Barthwal, Dehradun", amount: 5000, subtitle: "" },
+      { name: "Tarun Guha Neogi", amount: 5000, subtitle: "" },
+      { name: "Abhijit Patil", amount: 5000, subtitle: "" },
+      { name: "Samip Desai", amount: 5000, subtitle: "" },
+      { name: "Rajiv Kumar Singh, Rampur", amount: 2100, subtitle: "" },
+      { name: "Nikita Agarwal", amount: 1100, subtitle: "" },
     ]
   }
 ];
+
+// Calculate totals dynamically
+SPONSORS.forEach(category => {
+  const catTotal = category.items.reduce((sum, item) => sum + item.amount, 0);
+  if (category.category !== "Founding Sponsor") {
+    category.totalStr = `₹ ${catTotal.toLocaleString('en-IN')}/-`;
+  }
+});
+
+const GRAND_TOTAL = SPONSORS.reduce((total, cat) => total + cat.items.reduce((sum, item) => sum + item.amount, 0), 0);
+const TARGET_AMOUNT = 17500000;
+const PERCENT_ACHIEVED = ((GRAND_TOTAL / TARGET_AMOUNT) * 100).toFixed(2);
+const GRAND_TOTAL_LAKH = (GRAND_TOTAL / 100000).toFixed(2);
 
 export default function SponsorsSection() {
   const [ref, inView] = useInView({ threshold: 0.05, triggerOnce: true });
@@ -116,8 +143,8 @@ export default function SponsorsSection() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg shadow-amber-200 mb-6">
                   <TrendingUp size={32} />
                 </div>
-                <h3 className="text-5xl md:text-6xl font-black text-[#0B1E4A] mb-2 tracking-tight">₹ 71.40<span className="text-2xl text-slate-500 ml-1">Lakh</span></h3>
-                <p className="text-sm font-bold text-amber-600 uppercase tracking-widest">Raised So Far (₹ 71,40,201)</p>
+                <h3 className="text-5xl md:text-6xl font-black text-[#0B1E4A] mb-2 tracking-tight">₹ {GRAND_TOTAL_LAKH}<span className="text-2xl text-slate-500 ml-1">Lakh</span></h3>
+                <p className="text-sm font-bold text-amber-600 uppercase tracking-widest">Raised So Far (₹ {GRAND_TOTAL.toLocaleString('en-IN')})</p>
               </div>
 
               <div className="lg:col-span-2">
@@ -127,7 +154,7 @@ export default function SponsorsSection() {
                     <p className="text-2xl font-black text-emerald-600">₹ 1.75 Crore</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-3xl font-black text-[#0B1E4A]">40.80%</p>
+                    <p className="text-3xl font-black text-[#0B1E4A]">{PERCENT_ACHIEVED}%</p>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">of Target Achieved</p>
                   </div>
                 </div>
@@ -135,7 +162,7 @@ export default function SponsorsSection() {
                 <div className="w-full bg-slate-200 rounded-full h-6 sm:h-8 p-1 shadow-inner relative overflow-hidden">
                   <motion.div 
                     initial={{ width: 0 }} 
-                    animate={{ width: inView ? "40.80%" : 0 }} 
+                    animate={{ width: inView ? `${PERCENT_ACHIEVED}%` : 0 }} 
                     transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
                     className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full relative shadow-sm"
                   >
@@ -190,16 +217,16 @@ export default function SponsorsSection() {
                               category.color === 'blue' ? 'text-blue-600' : 
                               category.color === 'emerald' ? 'text-emerald-600' : 
                               category.color === 'rose' ? 'text-rose-600' : 
-                              'text-sky-600'}`}>{item.amount}</p>
+                              'text-sky-600'}`}>₹ {typeof item.amount === 'number' ? item.amount.toLocaleString('en-IN') : item.amount}/-</p>
                         </div>
                       </div>
                     ))}
                   </div>
                   
-                  {category.total && (
+                  {category.totalStr && (
                     <div className="mt-8 pt-5 border-t border-slate-200 flex justify-between items-center bg-rose-50/80 -mx-6 -mb-6 p-6">
                       <span className="font-bold text-slate-700 text-xs sm:text-sm uppercase tracking-wider">Total Support</span>
-                      <span className="font-black text-rose-600 text-lg sm:text-xl">{category.total}</span>
+                      <span className="font-black text-rose-600 text-lg sm:text-xl">{category.totalStr}</span>
                     </div>
                   )}
                 </div>

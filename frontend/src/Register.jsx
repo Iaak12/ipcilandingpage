@@ -13,6 +13,34 @@ import {
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } } };
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
+const REGISTRATION_FEES = {
+  indian: [
+    { id: 'ug', label: 'Undergraduate Students', early: 2000, regular: 3000, spot: 4000 },
+    { id: 'pg', label: 'Postgraduate Students', early: 3000, regular: 4000, spot: 5000 },
+    { id: 'phd', label: 'PhD Scholars / Research Fellows', early: 3500, regular: 4500, spot: 5500 },
+    { id: 'faculty', label: 'Faculty / Practitioners', early: 6000, regular: 7500, spot: 9000 },
+    { id: 'industry', label: 'Industry Delegates', early: 12000, regular: 15000, spot: 18000 },
+    { id: 'institutional', label: 'Institutional Delegation (5 Delegates)', early: 25000, regular: 30000, spot: null }
+  ],
+  international: [
+    { id: 'intl_student', label: 'International Students', early: 100, regular: 125, spot: 150, currency: 'USD' },
+    { id: 'intl_delegate', label: 'International Delegates', early: 200, regular: 250, spot: 300, currency: 'USD' }
+  ]
+};
+
+const THEMES = [
+  "Acute Pancreatitis", "Chronic Pancreatitis", "Pediatric Pancreatitis", "Genetics & Biomarkers",
+  "Endoscopy & Surgery", "Nutrition & Lifestyle", "Pain Management", "Basic Science",
+  "Integrative Medicine", "Drug Discovery & Reverse Pharmacology", "Patient Advocacy & Quality of Life"
+];
+
+const getCurrentPhase = () => {
+  const now = new Date();
+  if (now <= new Date('2026-09-30T23:59:59')) return 'early';
+  if (now <= new Date('2027-01-31T23:59:59')) return 'regular';
+  return 'spot';
+};
+
 export default function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', message: '' });
@@ -20,6 +48,23 @@ export default function Register() {
   const [errors, setErrors] = useState({});
   const [captchaToken, setCaptchaToken] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // New Registration Form State
+  const [nationality, setNationality] = useState('indian'); // 'indian' | 'international'
+  const [selectedCategoryId, setSelectedCategoryId] = useState('faculty');
+  const currentPhase = getCurrentPhase();
+
+  // Find the selected category data
+  const categoryData = REGISTRATION_FEES[nationality]?.find(c => c.id === selectedCategoryId) || REGISTRATION_FEES[nationality][0];
+  const currentPrice = categoryData[currentPhase];
+  const currency = categoryData.currency || 'INR';
+
+  // Make sure to update selected category if nationality changes and the old ID isn't found
+  useEffect(() => {
+    if (!REGISTRATION_FEES[nationality].find(c => c.id === selectedCategoryId)) {
+      setSelectedCategoryId(REGISTRATION_FEES[nationality][0].id);
+    }
+  }, [nationality]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -138,76 +183,82 @@ export default function Register() {
             <p className="text-slate-500 mt-3">Choose the appropriate category to register for IPCI 2027</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* UG Student */}
-            <div className="glass-sky rounded-3xl p-6 border border-sky-100 flex flex-col">
-              <h3 className="text-lg font-bold text-[#0B1E4A] mb-1">UG Student</h3>
-              <div className="text-sky-600 font-black text-3xl mb-2">₹2,200</div>
-              <div className="inline-flex items-center bg-sky-50 text-sky-700 text-xs font-bold px-2.5 py-1 rounded-md mb-5 border border-sky-100">
-                Foreign Delegates: USD 50
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-10">
+            {/* Interactive Form Card */}
+            <div className="lg:col-span-5">
+              <div className="glass rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-xl shadow-sky-100/50 relative overflow-hidden h-full flex flex-col">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-sky-400/10 rounded-full blur-3xl pointer-events-none"></div>
+                <h3 className="text-2xl font-black text-[#0B1E4A] mb-6">Calculate Your Fee</h3>
+                
+                <div className="space-y-6 relative z-10 flex-1 flex flex-col">
+                  <div>
+                    <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">Delegate Type</label>
+                    <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
+                      <button onClick={() => setNationality('indian')} className={`py-2.5 rounded-lg font-bold text-sm transition-all ${nationality === 'indian' ? 'bg-white text-[#0B1E4A] shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>Indian</button>
+                      <button onClick={() => setNationality('international')} className={`py-2.5 rounded-lg font-bold text-sm transition-all ${nationality === 'international' ? 'bg-white text-[#0B1E4A] shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>International</button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">Registration Category</label>
+                    <select value={selectedCategoryId} onChange={(e) => setSelectedCategoryId(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-800 bg-slate-50 outline-none focus:bg-white focus:border-sky-500 focus:ring-2 focus:ring-sky-100 appearance-none transition-all">
+                      {REGISTRATION_FEES[nationality].map(c => (
+                        <option key={c.id} value={c.id}>{c.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="pt-6 mt-auto border-t border-slate-100">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Payable ({currentPhase.toUpperCase()})</p>
+                    {currentPrice ? (
+                      <div className="text-4xl sm:text-5xl font-black text-sky-600 mb-2">
+                        {currency === 'INR' ? '₹' : '$'}{currentPrice.toLocaleString('en-IN')}
+                      </div>
+                    ) : (
+                      <div className="text-2xl font-bold text-slate-400 mb-2">Not Applicable</div>
+                    )}
+                    <p className="text-xs text-slate-500">Based on current date. Fees may change after deadlines.</p>
+                  </div>
+
+                  <button onClick={() => setIsModalOpen(true)} disabled={!currentPrice} className="w-full text-center py-4 rounded-xl font-black text-white bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 shadow-lg shadow-emerald-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2">
+                    Proceed to Registration
+                  </button>
+                </div>
               </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                {['Access to all scientific sessions', 'Conference cap & key ring', 'Access to exhibition area', 'Participation certificate', 'Tea/coffee & refreshments', 'Lunch on all days', 'Cultural Evening & Dinner (13 Mar)'].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                    <CheckCircle size={16} className="text-sky-500 shrink-0 mt-0.5" /> <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Register Now</a>
             </div>
 
-            {/* PG/PhD */}
-            <div className="glass-sky rounded-3xl p-6 border border-sky-100 flex flex-col">
-              <h3 className="text-lg font-bold text-[#0B1E4A] mb-1">PG / PhD Student</h3>
-              <div className="text-sky-600 font-black text-3xl mb-2">₹5,000</div>
-              <div className="inline-flex items-center bg-sky-50 text-sky-700 text-xs font-bold px-2.5 py-1 rounded-md mb-5 border border-sky-100">
-                Foreign Delegates: USD 100
+            {/* Pricing Table Reference */}
+            <div className="lg:col-span-7">
+              <div className="glass rounded-3xl p-6 sm:p-8 border border-slate-100 overflow-x-auto shadow-sm h-full">
+                <table className="w-full text-left border-collapse min-w-[500px]">
+                  <thead>
+                    <tr>
+                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider">Category</th>
+                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-emerald-500 uppercase tracking-wider">Early Bird<br/><span className="text-[10px] font-medium text-slate-400 normal-case">Up to 30 Sep '26</span></th>
+                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-sky-500 uppercase tracking-wider">Regular<br/><span className="text-[10px] font-medium text-slate-400 normal-case">1 Oct - 31 Jan '27</span></th>
+                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-amber-500 uppercase tracking-wider">Spot<br/><span className="text-[10px] font-medium text-slate-400 normal-case">From 1 Feb '27</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {REGISTRATION_FEES.indian.map(c => (
+                      <tr key={c.id} className="hover:bg-slate-50/80 transition-colors group">
+                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-bold text-[#0B1E4A] group-last:border-0">{c.label}</td>
+                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">₹{c.early?.toLocaleString('en-IN') || '-'}</td>
+                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">₹{c.regular?.toLocaleString('en-IN') || '-'}</td>
+                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">{c.spot ? `₹${c.spot.toLocaleString('en-IN')}` : '-'}</td>
+                      </tr>
+                    ))}
+                    {REGISTRATION_FEES.international.map((c, i) => (
+                      <tr key={c.id} className="hover:bg-sky-50/80 transition-colors bg-sky-50/30 group">
+                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-bold text-[#0B1E4A] ${i===1?'border-0':''}`}>{c.label}</td>
+                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.early}</td>
+                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.regular}</td>
+                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.spot}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                {['Access to all scientific sessions', 'Delegate kit', 'Participation certificate', 'Tea/coffee & refreshments', 'Lunch on all days', 'Access to exhibition area', 'Cultural Evening & Dinner (13 Mar)'].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                    <CheckCircle size={16} className="text-sky-500 shrink-0 mt-0.5" /> <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors">Register Now</a>
-            </div>
-
-            {/* Delegate */}
-            <div className="glass-green rounded-3xl p-6 border border-emerald-100 flex flex-col relative overflow-hidden shadow-lg shadow-emerald-100/50">
-              <div className="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Popular</div>
-              <h3 className="text-lg font-bold text-[#0B1E4A] mb-1">Delegate</h3>
-              <div className="text-emerald-600 font-black text-3xl mb-2">₹7,000</div>
-              <div className="inline-flex items-center bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-md mb-5 border border-emerald-100">
-                Foreign Delegates: USD 150
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                {['All scientific sessions & exhibition', 'Delegate kit & participation certificate', 'Digital abstract supplement', 'Tea/coffee, refreshments & Lunch', 'Faculty & Delegate Dinner (12 Mar)', 'Cultural Evening & Dinner (13 Mar)'].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                    <CheckCircle size={16} className="text-emerald-500 shrink-0 mt-0.5" /> <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-emerald-500 text-white hover:bg-emerald-600 transition-colors shadow-md">Register Now</a>
-            </div>
-
-            {/* Delegate + Poster */}
-            <div className="bg-gradient-to-b from-[#0B1E4A] to-[#1e3a8a] rounded-3xl p-6 border border-navy flex flex-col text-white shadow-xl transform lg:-translate-y-2">
-              <div className="inline-flex items-center gap-1.5 bg-amber-400 text-amber-900 text-xs font-bold px-2 py-1 rounded mb-3 w-max"><Sparkles size={12} /> Recommended for Researchers</div>
-              <h3 className="text-lg font-bold mb-1">Delegate + Poster</h3>
-              <div className="text-white font-black text-3xl mb-2">₹12,500</div>
-              <div className="inline-flex items-center bg-white/10 text-white/90 text-xs font-bold px-2.5 py-1 rounded-md mb-5 border border-white/20">
-                Foreign Delegates: USD 300
-              </div>
-              <ul className="space-y-3 mb-8 flex-1">
-                <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>All benefits of Delegate Registration</span></li>
-                <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Abstract submission & review</span></li>
-                <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Poster presentation opportunity</span></li>
-                <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Inclusion in conference proceedings</span></li>
-                <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Eligibility for Poster Awards</span></li>
-                <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Chance for 5-minute oral presentation</span></li>
-              </ul>
-              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="w-full text-center py-3 rounded-xl font-bold bg-amber-400 text-amber-900 hover:bg-amber-300 transition-colors shadow-md">Register & Submit</a>
             </div>
           </div>
         </div>
@@ -215,79 +266,127 @@ export default function Register() {
 
       {/* Info Blocks */}
       <section className="py-16 px-4 bg-emerald-50/30">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10">
+        <div className="max-w-7xl mx-auto space-y-10">
           
-          {/* Abstract & Awards */}
-          <div className="space-y-6">
-            <div className="glass rounded-3xl p-8 border border-white shadow-sm">
-              <h3 className="text-2xl font-black text-[#0B1E4A] mb-4 flex items-center gap-3">
-                <FileText className="text-emerald-500" /> Abstract Submission
+          {/* Registration Includes */}
+          <div className="glass rounded-3xl p-8 border border-white shadow-sm">
+            <h3 className="text-2xl font-black text-[#0B1E4A] mb-6 text-center">Registration Includes</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 text-center">
+              {[
+                { icon: Award, label: "Official IPCI Delegate Cap" },
+                { icon: CheckCircle, label: "IPCI Souvenir Key Ring" },
+                { icon: FileText, label: "Delegate Kit & Material" },
+                { icon: Users, label: "Two Working Lunches" },
+                { icon: Globe, label: "Four Tea/Snack Sessions" },
+                { icon: Heart, label: "Networking Dinner" },
+                { icon: FileText, label: "Participation Certificate" },
+                { icon: CheckCircle, label: "Exhibition & Sessions Access" }
+              ].map((item, i) => (
+                <div key={i} className="flex flex-col items-center justify-center gap-3 p-4 bg-white/50 rounded-2xl border border-white shadow-sm hover:-translate-y-1 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                    <item.icon size={24} />
+                  </div>
+                  <span className="text-xs font-bold text-slate-700 leading-tight">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-10">
+            {/* Present Your Research */}
+            <div className="glass rounded-3xl p-8 border border-white shadow-sm lg:col-span-2">
+              <h3 className="text-2xl font-black text-[#0B1E4A] mb-6 flex items-center gap-3">
+                <FileText className="text-emerald-500" /> Present Your Research at IPCI 2027
               </h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                Participants registering under the <strong>"Delegate with Poster Presentation"</strong> category may submit their research findings for scientific review. Accepted abstracts will be presented as posters. All abstracts undergo peer review.
-              </p>
-              <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
-                <div className="text-sm text-amber-800 font-medium flex items-start gap-2">
-                  <Award size={18} className="shrink-0 mt-0.5" />
-                  <span>
-                    IPCI 2027 will recognize outstanding scientific contributions through the <strong>Best Five Poster Awards</strong> presented during the Valedictory Session.
-                  </span>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-white/60 p-6 rounded-2xl border border-white shadow-sm">
+                  <h4 className="font-bold text-[#0B1E4A] mb-2 text-lg">Abstract Submission</h4>
+                  <div className="inline-block bg-emerald-100 text-emerald-700 font-black text-xs px-2 py-1 rounded mb-3">FREE OF COST</div>
+                  <p className="text-sm text-slate-600 leading-relaxed mb-4">Researchers, clinicians, students and scholars are invited to submit abstracts on all aspects of pancreatitis research, clinical care, innovation and patient outcomes.</p>
+                  
+                  <h4 className="font-bold text-[#0B1E4A] mb-2 mt-4 text-sm">Poster Presentations</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">All accepted abstracts will be presented as posters. Poster presentation fee is applicable only after abstract acceptance and is separate from conference registration.</p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-[#0B1E4A] to-blue-900 p-6 rounded-2xl border border-blue-800 shadow-sm text-white relative overflow-hidden">
+                  <Star className="absolute -top-4 -right-4 w-24 h-24 text-white/5" />
+                  <h4 className="font-bold text-amber-400 mb-2 text-lg flex items-center gap-2"><Sparkles size={18} /> IPCI Spotlight Session</h4>
+                  <p className="text-sm text-sky-100 leading-relaxed mb-4">Top 10-15 posters selected by the Scientific Committee will be invited for:</p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2 text-sm text-white/90"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> 5-Minute Spotlight Presentation</li>
+                    <li className="flex items-start gap-2 text-sm text-white/90"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> Recognition Certificate</li>
+                    <li className="flex items-start gap-2 text-sm text-white/90"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> Presentation before International Experts</li>
+                  </ul>
                 </div>
               </div>
             </div>
 
-            <div className="glass rounded-3xl p-8 border border-white shadow-sm">
-              <h3 className="text-2xl font-black text-[#0B1E4A] mb-4 flex items-center gap-3">
-                <Globe className="text-sky-500" /> Special Events
+            {/* Important Dates */}
+            <div className="glass rounded-3xl p-8 border border-white shadow-sm bg-sky-50/50">
+              <h3 className="text-xl font-black text-[#0B1E4A] mb-6 flex items-center gap-3">
+                <CalendarDays className="text-sky-500" /> Important Dates
               </h3>
-              <div className="space-y-4">
-                <div className="p-4 bg-sky-50/50 rounded-xl border border-sky-100">
-                  <h4 className="font-bold text-[#0B1E4A] text-sm">Faculty & Delegate Networking Dinner (12 March)</h4>
-                  <p className="text-xs text-slate-600 mt-1">Exclusive networking to facilitate interaction among clinicians, researchers, and healthcare leaders. <em>*For Delegates & Invited Faculty only.</em></p>
-                </div>
-                <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                  <h4 className="font-bold text-[#0B1E4A] text-sm">Cultural Evening & Conference Dinner (13 March)</h4>
-                  <p className="text-xs text-slate-600 mt-1">A special cultural programme celebrating India's rich traditions followed by dinner for all participants.</p>
-                </div>
+              <div className="space-y-4 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-sky-200 before:to-transparent">
+                {[
+                  { title: "Abstract Submission Opens", date: "June 2026" },
+                  { title: "Early Bird Reg. Closes", date: "30 September 2026", highlight: true },
+                  { title: "Abstract Submission Deadline", date: "31 December 2026" },
+                  { title: "Acceptance Notification", date: "15 January 2027" },
+                  { title: "Conference Dates", date: "12-14 March 2027", highlight: true }
+                ].map((item, i) => (
+                  <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div className="flex items-center justify-center w-5 h-5 rounded-full border-2 border-white bg-sky-500 text-slate-500 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-sm relative z-10" />
+                    <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] p-3 rounded-xl bg-white shadow-sm border border-slate-100 flex flex-col">
+                      <span className="font-bold text-slate-800 text-xs">{item.title}</span>
+                      <span className={`text-xs font-bold mt-1 ${item.highlight ? 'text-sky-600' : 'text-slate-500'}`}>{item.date}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Guidelines & Exclusions */}
-          <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-10">
+            {/* Suggested Themes */}
             <div className="glass rounded-3xl p-8 border border-white shadow-sm">
-              <h3 className="text-2xl font-black text-[#0B1E4A] mb-4 flex items-center gap-3">
-                <AlertCircle className="text-amber-500" /> Important Information
+              <h3 className="text-xl font-black text-[#0B1E4A] mb-5 flex items-center gap-3">
+                <Globe className="text-amber-500" /> Suggested Themes
               </h3>
-              <ul className="space-y-3">
-                {[
-                  "Registration is mandatory for all participants.",
-                  "Presenting authors must complete registration under 'Delegate with Poster Presentation'.",
-                  "Certificates will be issued only to registered participants.",
-                  "Registration fees are non-refundable and non-transferable.",
-                  "The Scientific Committee's decision on abstract acceptance is final."
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                    <Info size={16} className="text-amber-500 shrink-0 mt-0.5" /> <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="glass rounded-3xl p-8 border border-white shadow-sm">
-              <h3 className="text-xl font-black text-[#0B1E4A] mb-4 flex items-center gap-3">
-                <XCircle className="text-red-400" /> Fee Does Not Include
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  "Accommodation", "Airfare or Rail Travel", "Local Transportation", 
-                  "Airport/Station Transfers", "Sightseeing Activities", "Visa Expenses", 
-                  "Travel Insurance", "Personal Expenses"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm text-slate-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-300"></div> {item}
+              <div className="grid sm:grid-cols-2 gap-y-3 gap-x-4">
+                {THEMES.map((theme, i) => (
+                  <div key={i} className="flex items-start gap-2 text-sm font-medium text-slate-700">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" /> {theme}
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* IPCI Awards */}
+            <div className="glass rounded-3xl p-8 border border-white shadow-sm">
+              <h3 className="text-xl font-black text-[#0B1E4A] mb-5 flex items-center gap-3">
+                <Award className="text-amber-500" /> IPCI Awards
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg inline-block mb-3">Student Category</h4>
+                  <ul className="space-y-2.5">
+                    {["Best Undergraduate Poster", "Best Postgraduate Poster", "Best PhD Research Poster", "Young Investigator Award"].map((award, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-slate-700 font-medium">
+                        <Star size={14} className="text-emerald-500 shrink-0 mt-0.5 fill-emerald-50" /> {award}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg inline-block mb-3">Professional Category</h4>
+                  <ul className="space-y-2.5">
+                    {["Best Clinical Research Poster", "Best Basic Science Poster", "Best Integrative Medicine Research Poster", "IPCI Innovation Award", "Sant Prakash Memorial Award for Innovation"].map((award, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-slate-700 font-medium">
+                        <Star size={14} className="text-purple-500 shrink-0 mt-0.5 fill-purple-50" /> {award}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
