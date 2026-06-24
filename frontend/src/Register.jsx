@@ -328,18 +328,18 @@ export default function Register() {
               <div className="flex overflow-x-auto gap-5 pb-6 pt-2 snap-x hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
                 <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
                 {[
-                  { name: 'Nainital', km: '60 km', img: 'https://images.unsplash.com/photo-1594818898109-44704fb548f6?auto=format&fit=crop&w=400&q=80' },
-                  { name: 'Bhimtal', km: '50 km', img: 'https://images.unsplash.com/photo-1586899028174-e7098604235b?auto=format&fit=crop&w=400&q=80' },
-                  { name: 'Sattal', km: '55 km', img: 'https://images.unsplash.com/photo-1610960515124-774b78bb24a0?auto=format&fit=crop&w=400&q=80' },
-                  { name: 'Naukuchiatal', km: '55 km', img: 'https://images.unsplash.com/photo-1626084931922-38d4e9b940e7?auto=format&fit=crop&w=400&q=80' },
-                  { name: 'Jim Corbett', km: '85 km', img: 'https://images.unsplash.com/photo-1551840656-78e24dd370e0?auto=format&fit=crop&w=400&q=80' },
-                  { name: 'Mukteshwar', km: '95 km', img: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80' },
-                  { name: 'Kainchi Dham', km: '70 km', img: 'https://images.unsplash.com/photo-1600100397608-f010f41cb839?auto=format&fit=crop&w=400&q=80' }
+                  { name: 'Nainital', km: '60 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Nainital_metro.jpg/500px-Nainital_metro.jpg' },
+                  { name: 'Bhimtal', km: '50 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Lake_Bhimtal.jpg/500px-Lake_Bhimtal.jpg' },
+                  { name: 'Sattal', km: '55 km', img: 'https://picsum.photos/id/1015/400/400' },
+                  { name: 'Naukuchiatal', km: '55 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Naukuchiatal_Lake.jpg/500px-Naukuchiatal_Lake.jpg' },
+                  { name: 'Jim Corbett', km: '85 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Bengal-Tiger_Corbett_Uttarakhand_Dec-2013.jpg/500px-Bengal-Tiger_Corbett_Uttarakhand_Dec-2013.jpg' },
+                  { name: 'Mukteshwar', km: '95 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Chauli_Ki_Jali%2C_Mukteshwar.jpg/500px-Chauli_Ki_Jali%2C_Mukteshwar.jpg' },
+                  { name: 'Kainchi Dham', km: '70 km', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Early_morning_Glimpse_of_Kainchi_Dham_Nainital_2023.jpg/500px-Early_morning_Glimpse_of_Kainchi_Dham_Nainital_2023.jpg' }
                 ].map((place, idx) => (
-                  <div key={idx} className={`shrink-0 w-32 h-32 sm:w-36 sm:h-36 rounded-2xl bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center relative overflow-hidden group snap-center transition-transform ${idx % 2 === 0 ? 'rotate-2 hover:rotate-0' : '-rotate-2 hover:rotate-0'}`}>
+                  <div key={idx} className={`shrink-0 w-32 h-32 sm:w-36 sm:h-36 rounded-2xl bg-[#0B1E4A] border border-white/30 flex items-center justify-center relative overflow-hidden group snap-center transition-transform ${idx % 2 === 0 ? 'rotate-2 hover:rotate-0' : '-rotate-2 hover:rotate-0'}`}>
                     <img src={place.img} alt={place.name} className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 z-0"></div>
-                    <span className="relative z-10 text-center font-bold text-sm sm:text-base text-white drop-shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 z-0"></div>
+                    <span className="relative z-10 text-center font-bold text-sm sm:text-base text-white drop-shadow-lg mt-auto pb-4">
                       {place.name}<br/><span className="font-medium text-xs text-emerald-300 drop-shadow-md">{place.km}</span>
                     </span>
                   </div>
