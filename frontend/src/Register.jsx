@@ -127,7 +127,8 @@ export default function Register() {
             {/* UG Student */}
             <div className="glass-sky rounded-3xl p-6 border border-sky-100 flex flex-col">
               <h3 className="text-lg font-bold text-[#0B1E4A] mb-1">UG Student</h3>
-              <div className="text-sky-600 font-black text-3xl mb-4">₹2,200 <span className="text-sm font-medium text-slate-500">/ USD 50</span></div>
+              <div className="text-sky-600 font-black text-3xl mb-1">₹2,200</div>
+              <div className="text-sm font-medium text-slate-500 mb-4">Foreign Delegates: USD 50</div>
               <ul className="space-y-3 mb-8 flex-1">
                 {['Access to all scientific sessions', 'Conference cap & key ring', 'Access to exhibition area', 'Participation certificate', 'Tea/coffee & refreshments', 'Lunch on all days', 'Cultural Evening & Dinner (13 Mar)'].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
@@ -141,7 +142,8 @@ export default function Register() {
             {/* PG/PhD */}
             <div className="glass-sky rounded-3xl p-6 border border-sky-100 flex flex-col">
               <h3 className="text-lg font-bold text-[#0B1E4A] mb-1">PG / PhD Student</h3>
-              <div className="text-sky-600 font-black text-3xl mb-4">₹5,000 <span className="text-sm font-medium text-slate-500">/ USD 100</span></div>
+              <div className="text-sky-600 font-black text-3xl mb-1">₹5,000</div>
+              <div className="text-sm font-medium text-slate-500 mb-4">Foreign Delegates: USD 100</div>
               <ul className="space-y-3 mb-8 flex-1">
                 {['Access to all scientific sessions', 'Delegate kit', 'Participation certificate', 'Tea/coffee & refreshments', 'Lunch on all days', 'Access to exhibition area', 'Cultural Evening & Dinner (13 Mar)'].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
@@ -156,7 +158,8 @@ export default function Register() {
             <div className="glass-green rounded-3xl p-6 border border-emerald-100 flex flex-col relative overflow-hidden shadow-lg shadow-emerald-100/50">
               <div className="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Popular</div>
               <h3 className="text-lg font-bold text-[#0B1E4A] mb-1">Delegate</h3>
-              <div className="text-emerald-600 font-black text-3xl mb-4">₹7,000 <span className="text-sm font-medium text-slate-500">/ USD 150</span></div>
+              <div className="text-emerald-600 font-black text-3xl mb-1">₹7,000</div>
+              <div className="text-sm font-medium text-slate-500 mb-4">Foreign Delegates: USD 150</div>
               <ul className="space-y-3 mb-8 flex-1">
                 {['All scientific sessions & exhibition', 'Delegate kit & participation certificate', 'Digital abstract supplement', 'Tea/coffee, refreshments & Lunch', 'Faculty & Delegate Dinner (12 Mar)', 'Cultural Evening & Dinner (13 Mar)'].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
@@ -171,7 +174,8 @@ export default function Register() {
             <div className="bg-gradient-to-b from-[#0B1E4A] to-[#1e3a8a] rounded-3xl p-6 border border-navy flex flex-col text-white shadow-xl transform lg:-translate-y-2">
               <div className="inline-flex items-center gap-1.5 bg-amber-400 text-amber-900 text-xs font-bold px-2 py-1 rounded mb-3 w-max"><Sparkles size={12} /> Recommended for Researchers</div>
               <h3 className="text-lg font-bold mb-1">Delegate + Poster</h3>
-              <div className="text-white font-black text-3xl mb-4">₹12,500 <span className="text-sm font-medium text-white/60">/ USD 300</span></div>
+              <div className="text-white font-black text-3xl mb-1">₹12,500</div>
+              <div className="text-sm font-medium text-white/80 mb-4">Foreign Delegates: USD 300</div>
               <ul className="space-y-3 mb-8 flex-1">
                 <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>All benefits of Delegate Registration</span></li>
                 <li className="flex items-start gap-2 text-sm text-sky-100"><CheckCircle size={16} className="text-amber-400 shrink-0 mt-0.5" /> <span>Abstract submission & review</span></li>
