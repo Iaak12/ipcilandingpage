@@ -313,23 +313,37 @@ export default function Register() {
           {/* Explore Uttarakhand */}
           <div className="mt-12 bg-gradient-to-r from-emerald-500 to-sky-500 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 justify-between">
-              <div className="max-w-xl">
+            <div className="relative z-10 flex flex-col gap-8">
+              <div className="max-w-2xl">
                 <h3 className="text-2xl sm:text-3xl font-black mb-3">Explore Uttarakhand</h3>
                 <p className="text-white/90 text-sm sm:text-base leading-relaxed mb-6">
-                  Extend your visit and experience the cultural heritage, wildlife, and natural beauty. Nearby attractions include Nainital (60km), Jim Corbett National Park (85km), Bhimtal, and Kainchi Dham.
+                  Extend your visit and experience the cultural heritage, wildlife, and natural beauty. Explore these nearby attractions before or after the conference.
                 </p>
                 <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-lg text-sm font-semibold">
                   <Info size={16} /> Plan sightseeing before or after conference dates.
                 </div>
               </div>
-              <div className="shrink-0 flex gap-4">
-                <div className="w-32 h-32 rounded-2xl bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center rotate-3 hover:rotate-0 transition-transform">
-                  <span className="text-center font-bold text-sm">Nainital<br/><span className="font-normal text-xs opacity-80">60 km</span></span>
-                </div>
-                <div className="w-32 h-32 rounded-2xl bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center -rotate-3 hover:rotate-0 transition-transform mt-8">
-                  <span className="text-center font-bold text-sm">Jim Corbett<br/><span className="font-normal text-xs opacity-80">85 km</span></span>
-                </div>
+              
+              {/* Attraction Boxes */}
+              <div className="flex overflow-x-auto gap-5 pb-6 pt-2 snap-x hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
+                <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+                {[
+                  { name: 'Nainital', km: '60 km', img: 'https://images.unsplash.com/photo-1594818898109-44704fb548f6?auto=format&fit=crop&w=400&q=80' },
+                  { name: 'Bhimtal', km: '50 km', img: 'https://images.unsplash.com/photo-1586899028174-e7098604235b?auto=format&fit=crop&w=400&q=80' },
+                  { name: 'Sattal', km: '55 km', img: 'https://images.unsplash.com/photo-1610960515124-774b78bb24a0?auto=format&fit=crop&w=400&q=80' },
+                  { name: 'Naukuchiatal', km: '55 km', img: 'https://images.unsplash.com/photo-1626084931922-38d4e9b940e7?auto=format&fit=crop&w=400&q=80' },
+                  { name: 'Jim Corbett', km: '85 km', img: 'https://images.unsplash.com/photo-1551840656-78e24dd370e0?auto=format&fit=crop&w=400&q=80' },
+                  { name: 'Mukteshwar', km: '95 km', img: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=400&q=80' },
+                  { name: 'Kainchi Dham', km: '70 km', img: 'https://images.unsplash.com/photo-1600100397608-f010f41cb839?auto=format&fit=crop&w=400&q=80' }
+                ].map((place, idx) => (
+                  <div key={idx} className={`shrink-0 w-32 h-32 sm:w-36 sm:h-36 rounded-2xl bg-white/20 backdrop-blur border border-white/30 flex items-center justify-center relative overflow-hidden group snap-center transition-transform ${idx % 2 === 0 ? 'rotate-2 hover:rotate-0' : '-rotate-2 hover:rotate-0'}`}>
+                    <img src={place.img} alt={place.name} className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 z-0"></div>
+                    <span className="relative z-10 text-center font-bold text-sm sm:text-base text-white drop-shadow-lg">
+                      {place.name}<br/><span className="font-medium text-xs text-emerald-300 drop-shadow-md">{place.km}</span>
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
