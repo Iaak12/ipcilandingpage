@@ -179,19 +179,19 @@ export default function SponsorsSection() {
             </div>
           </motion.div>
 
-          {/* Sponsors Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {/* Sponsors Grid (Masonry Layout) */}
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 sm:gap-8 space-y-6 sm:space-y-8">
             {SPONSORS.map((category, idx) => (
-              <motion.div key={idx} variants={fadeUp} className={`glass rounded-3xl overflow-hidden border border-white shadow-lg transition-transform hover:-translate-y-1 flex flex-col ${idx === 2 ? "lg:col-span-2 lg:row-span-2" : ""}`}>
+              <motion.div key={idx} variants={fadeUp} className="break-inside-avoid glass rounded-3xl overflow-hidden border border-white shadow-lg transition-transform hover:-translate-y-1 flex flex-col">
                 <div className={`p-4 sm:p-5 bg-gradient-to-r ${category.color === 'amber' ? 'from-amber-400 to-orange-500' : category.color === 'blue' ? 'from-[#0B1E4A] to-blue-800' : category.color === 'emerald' ? 'from-emerald-600 to-teal-700' : category.color === 'rose' ? 'from-rose-700 to-red-800' : 'from-sky-500 to-blue-600'} text-white flex items-center gap-3`}>
                   <category.icon size={22} className="opacity-90" />
                   <h4 className="font-black text-sm sm:text-base uppercase tracking-wider">{category.category}</h4>
                 </div>
                 
                 <div className="p-6 flex-1 flex flex-col">
-                  <div className={`flex flex-1 ${idx === 2 ? "flex-wrap lg:grid lg:grid-cols-2 gap-x-8" : "flex-col"} gap-y-5`}>
+                  <div className="flex flex-col gap-y-5">
                     {category.items.map((item, i) => (
-                      <div key={i} className={`flex items-start gap-4 ${idx === 2 ? "w-full" : "w-full"} group`}>
+                      <div key={i} className="flex items-start gap-4 w-full group">
                         {item.logo ? (
                           <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center shrink-0 border border-slate-200 shadow-sm overflow-hidden p-1 group-hover:shadow-md group-hover:border-slate-300 transition-all">
                             <img src={item.logo} alt={item.name} className="w-full h-full object-contain" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
@@ -206,7 +206,7 @@ export default function SponsorsSection() {
                               category.color === 'emerald' ? 'bg-emerald-50 border-emerald-200 text-emerald-500 group-hover:bg-emerald-100' : 
                               category.color === 'rose' ? 'bg-rose-50 border-rose-200 text-rose-500 group-hover:bg-rose-100' : 
                               'bg-sky-50 border-sky-200 text-sky-500 group-hover:bg-sky-100'}`}>
-                            <Heart size={18} className={idx === 2 ? "fill-current opacity-50" : "opacity-50"} />
+                            <Heart size={18} className="opacity-50" />
                           </div>
                         )}
                         <div className="flex-1 mt-0.5">
