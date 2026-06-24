@@ -7,7 +7,7 @@ import {
   CalendarDays, MapPin, ArrowLeft, ArrowRight,
   CheckCircle, Users, Award, FileText, Globe, Info,
   Plane, Train, Car, Home, XCircle, AlertCircle, Sparkles, BookOpen,
-  X, Loader2, Send
+  X, Loader2, Send, Heart, Star
 } from 'lucide-react';
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } } };
