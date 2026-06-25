@@ -230,34 +230,84 @@ export default function Register() {
             {/* Pricing Table Reference */}
             <div className="lg:col-span-7">
               <div className="glass rounded-3xl p-6 sm:p-8 border border-slate-100 overflow-x-auto shadow-sm h-full">
-                <table className="w-full text-left border-collapse min-w-[500px]">
-                  <thead>
-                    <tr>
-                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider">Category</th>
-                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-emerald-500 uppercase tracking-wider">Early Bird<br/><span className="text-[10px] font-medium text-slate-400 normal-case">Up to 30 Sep '26</span></th>
-                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-sky-500 uppercase tracking-wider">Regular<br/><span className="text-[10px] font-medium text-slate-400 normal-case">1 Oct - 31 Jan '27</span></th>
-                      <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-amber-500 uppercase tracking-wider">Spot<br/><span className="text-[10px] font-medium text-slate-400 normal-case">From 1 Feb '27</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {REGISTRATION_FEES.indian.map(c => (
-                      <tr key={c.id} className="hover:bg-slate-50/80 transition-colors group">
-                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-bold text-[#0B1E4A] group-last:border-0">{c.label}</td>
-                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">₹{c.early?.toLocaleString('en-IN') || '-'}</td>
-                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">₹{c.regular?.toLocaleString('en-IN') || '-'}</td>
-                        <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">{c.spot ? `₹${c.spot.toLocaleString('en-IN')}` : '-'}</td>
+                {/* Desktop Table View */}
+                <div className="hidden md:block">
+                  <table className="w-full text-left border-collapse min-w-[500px]">
+                    <thead>
+                      <tr>
+                        <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider">Category</th>
+                        <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-emerald-500 uppercase tracking-wider">Early Bird<br/><span className="text-[10px] font-medium text-slate-400 normal-case">Up to 30 Sep '26</span></th>
+                        <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-sky-500 uppercase tracking-wider">Regular<br/><span className="text-[10px] font-medium text-slate-400 normal-case">1 Oct - 31 Jan '27</span></th>
+                        <th className="pb-4 pt-2 px-4 border-b border-slate-200 text-xs font-bold text-amber-500 uppercase tracking-wider">Spot<br/><span className="text-[10px] font-medium text-slate-400 normal-case">From 1 Feb '27</span></th>
                       </tr>
-                    ))}
-                    {REGISTRATION_FEES.international.map((c, i) => (
-                      <tr key={c.id} className="hover:bg-sky-50/80 transition-colors bg-sky-50/30 group">
-                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-bold text-[#0B1E4A] ${i===1?'border-0':''}`}>{c.label}</td>
-                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.early}</td>
-                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.regular}</td>
-                        <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.spot}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {REGISTRATION_FEES.indian.map(c => (
+                        <tr key={c.id} className="hover:bg-slate-50/80 transition-colors group">
+                          <td className="py-3 px-4 border-b border-slate-50 text-sm font-bold text-[#0B1E4A] group-last:border-0">{c.label}</td>
+                          <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">₹{c.early?.toLocaleString('en-IN') || '-'}</td>
+                          <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">₹{c.regular?.toLocaleString('en-IN') || '-'}</td>
+                          <td className="py-3 px-4 border-b border-slate-50 text-sm font-medium text-slate-600 group-last:border-0">{c.spot ? `₹${c.spot.toLocaleString('en-IN')}` : '-'}</td>
+                        </tr>
+                      ))}
+                      {REGISTRATION_FEES.international.map((c, i) => (
+                        <tr key={c.id} className="hover:bg-sky-50/80 transition-colors bg-sky-50/30 group">
+                          <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-bold text-[#0B1E4A] ${i===1?'border-0':''}`}>{c.label}</td>
+                          <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.early}</td>
+                          <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.regular}</td>
+                          <td className={`py-3 px-4 border-b border-sky-100/50 text-sm font-medium text-slate-600 ${i===1?'border-0':''}`}>${c.spot}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Mobile Card View */}
+                <div className="md:hidden space-y-4">
+                  {/* Indian Fees */}
+                  <h4 className="font-bold text-[#0B1E4A] border-b border-slate-100 pb-2 mb-3">Indian Delegates</h4>
+                  {REGISTRATION_FEES.indian.map(c => (
+                    <div key={c.id} className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                      <div className="font-bold text-[#0B1E4A] mb-3">{c.label}</div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-slate-500">Early Bird <span className="text-[10px] ml-1">(Up to 30 Sep '26)</span></span>
+                          <span className="font-bold text-emerald-600">₹{c.early?.toLocaleString('en-IN') || '-'}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-slate-500">Regular <span className="text-[10px] ml-1">(1 Oct - 31 Jan '27)</span></span>
+                          <span className="font-bold text-sky-600">₹{c.regular?.toLocaleString('en-IN') || '-'}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-slate-500">Spot <span className="text-[10px] ml-1">(From 1 Feb '27)</span></span>
+                          <span className="font-bold text-amber-600">{c.spot ? `₹${c.spot.toLocaleString('en-IN')}` : '-'}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* International Fees */}
+                  <h4 className="font-bold text-[#0B1E4A] border-b border-slate-100 pb-2 mb-3 mt-6">International Delegates</h4>
+                  {REGISTRATION_FEES.international.map(c => (
+                    <div key={c.id} className="bg-sky-50 rounded-xl p-4 border border-sky-100">
+                      <div className="font-bold text-[#0B1E4A] mb-3">{c.label}</div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-slate-500">Early Bird <span className="text-[10px] ml-1">(Up to 30 Sep '26)</span></span>
+                          <span className="font-bold text-emerald-600">${c.early}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-slate-500">Regular <span className="text-[10px] ml-1">(1 Oct - 31 Jan '27)</span></span>
+                          <span className="font-bold text-sky-600">${c.regular}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-slate-500">Spot <span className="text-[10px] ml-1">(From 1 Feb '27)</span></span>
+                          <span className="font-bold text-amber-600">${c.spot}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
