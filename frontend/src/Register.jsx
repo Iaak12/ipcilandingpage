@@ -94,22 +94,35 @@ export default function Register() {
     return e;
   };
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
-    const errs = validate();
-    if (!captchaToken) errs.captcha = "Please verify that you are human.";
-    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
 
-    setIsSubmitting(true);
+  const submitForm = async (paymentId) => {
     const formData = new FormData();
     formData.append("access_key", "045af9f2-df45-4afd-bacb-f59ed567d070");
     formData.append("h-captcha-response", captchaToken);
-    formData.append("subject", "New Registration for IPCI 2027");
-    formData.append("from_name", "IPCI 2027 Website");
+    formData.append("subject", `New Registration & Payment - ${form.name}`);
+    formData.append("from_name", "IPCI 2027 Registration");
+    
+    // Add ReplyTo so the admin can easily reply to the user
+    formData.append("replyTo", form.email);
+    
     formData.append("Name", form.name);
     formData.append("Email", form.email);
     formData.append("Phone", form.phone);
     formData.append("Profession", form.profession);
+    formData.append("Category", categoryData.label);
+    formData.append("Amount Paid", `${currency === 'INR' ? '₹' : '$'}${currentPrice.toLocaleString('en-IN')}`);
+    formData.append("Payment Status", "Successful");
+    formData.append("Razorpay Payment ID", paymentId);
+    
     if (form.message.trim()) {
       formData.append("Message", form.message);
     }
@@ -124,13 +137,57 @@ export default function Register() {
         setErrors({});
         setSubmitted(true);
       } else {
-        alert("Something went wrong: " + data.message);
+        alert("Something went wrong with form submission: " + data.message);
       }
     } catch (error) {
-      alert("Something went wrong. Please try again later.");
+      alert("Something went wrong submitting form. Please contact support.");
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    const errs = validate();
+    if (!captchaToken) errs.captcha = "Please verify that you are human.";
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+
+    setIsSubmitting(true);
+    
+    const res = await loadRazorpayScript();
+    if (!res) {
+      alert("Razorpay SDK failed to load. Please check your internet connection.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const options = {
+      key: "rzp_live_T6CokHy3SBvB4h",
+      amount: currentPrice * 100, // Amount in paise/cents
+      currency: currency,
+      name: "IPCI 2027",
+      description: `Registration Fee - ${categoryData.label}`,
+      handler: async function (response) {
+        // Successful payment, proceed to submit form
+        await submitForm(response.razorpay_payment_id);
+      },
+      prefill: {
+        name: form.name,
+        email: form.email,
+        contact: form.phone
+      },
+      theme: {
+        color: "#0ea5e9" // Tailwind sky-500
+      },
+      modal: {
+        ondismiss: function() {
+          setIsSubmitting(false);
+        }
+      }
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
   };
 
   return (
