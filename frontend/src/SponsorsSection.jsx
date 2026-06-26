@@ -31,7 +31,7 @@ const SPONSORS = [
     icon: Award,
     color: "amber",
     items: [
-      { name: "VCPCRF Founders' Contribution", amount: 6000000, subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/logos/vcpcrf.png" }
+      { name: "VCPCRF Founders' Contribution", amount: 6000000, subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/logos/sponsor/vaidyachandraprakash.jpeg" }
     ]
   },
   {
@@ -39,10 +39,10 @@ const SPONSORS = [
     icon: Building,
     color: "blue",
     items: [
-      { name: "Zandu Care", amount: 250000, subtitle: "Silver Sponsor", logo: "/logos/zandu.png" },
+      { name: "Zandu Care", amount: 250000, subtitle: "Silver Sponsor", logo: "/logos/sponsor/zandu.jpeg" },
       { name: "Sudhir Cranes Pvt Ltd", amount: 51000, subtitle: "Industry Sponsor" },
-      { name: "Venus Stampings Pvt. Ltd.", amount: 50000, subtitle: "VENUS", logo: "/logos/venus.png" },
-      { name: "ND R.F.M.", amount: 31000, subtitle: "", logo: "/logos/ndrfm.png" },
+      { name: "Venus Stampings Pvt. Ltd.", amount: 50000, subtitle: "VENUS" },
+      { name: "ND R.F.M.", amount: 31000, subtitle: "" },
     ]
   },
   {
@@ -51,11 +51,11 @@ const SPONSORS = [
     color: "rose",
     items: [
       { name: "Dr Neeraj Gupta, Rishikesh", amount: 250000, subtitle: "" },
-      { name: "Atharva Ayurveda, Rajkot", amount: 150000, subtitle: "", logo: "/logos/atharva.png" },
+      { name: "Atharva Ayurveda, Rajkot", amount: 150000, subtitle: "", logo: "/logos/sponsor/atharva.jpeg" },
       { name: "Dr C K Katiyar, Gurugram", amount: 100000, subtitle: "" },
       { name: "Prof (Dr) G. G. Gangadharan, Bangalore", amount: 100000, subtitle: "" },
-      { name: "SL Ayucare Wellness Center, Rampur", amount: 50000, subtitle: "", logo: "/logos/sl-ayucare.png" },
-      { name: "Dr. Anuj Jain, Gwalior", amount: 250000, subtitle: "", logo: "/logos/anuj-jain.png" }, // Wait, old was 25000. Let's keep old value: 25000
+      { name: "SL Ayucare Wellness Center, Rampur", amount: 50000, subtitle: "" },
+      { name: "Dr. Anuj Jain, Gwalior", amount: 250000, subtitle: "" }, // Wait, old was 25000. Let's keep old value: 25000
       { name: "Vd Sonal, Mumbai", amount: 11000, subtitle: "" },
       { name: "Dr Ravinder Amraik", amount: 11000, subtitle: "" },
       { name: "Vaidya Lavkush Nigam, Ayodhya", amount: 11111, subtitle: "" },
@@ -70,7 +70,7 @@ const SPONSORS = [
     color: "emerald",
     items: [
       { name: "R B Ayurvedic Medical College", amount: 250000, subtitle: "Agra" },
-      { name: "Uttaranchal Ayurvedic College", amount: 151000, subtitle: "Dehradun", logo: "/logos/uttaranchal.png" }
+      { name: "Uttaranchal Ayurvedic College", amount: 151000, subtitle: "Dehradun", logo: "/logos/sponsor/utranchalmedicalcollege.jpeg" }
     ]
   },
   {
