@@ -187,7 +187,7 @@ export default function Register() {
     }
 
     const options = {
-      key: "rzp_live_T6CokHy3SBvB4h",
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_T6CokHy3SBvB4h",
       amount: currentPrice * 100, // Amount in paise/cents
       currency: currency,
       name: "IPCI 2027",
