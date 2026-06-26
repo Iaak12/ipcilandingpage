@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   CalendarDays, MapPin, Mail, Phone, ArrowRight, Menu, X,
@@ -845,7 +844,21 @@ function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
-  const [captchaToken, setCaptchaToken] = useState("");
+
+  // Simple Math Captcha State
+  const [mathCaptcha, setMathCaptcha] = useState({ num1: 0, num2: 0, answer: '' });
+  
+  const generateCaptcha = () => {
+    setMathCaptcha({
+      num1: Math.floor(Math.random() * 10) + 1,
+      num2: Math.floor(Math.random() * 10) + 1,
+      answer: ''
+    });
+  };
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
 
   const validate = () => {
     const e = {};
@@ -861,13 +874,22 @@ function ContactSection() {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     const errs = validate();
-    if (!captchaToken) errs.captcha = "Please verify that you are human.";
+    
+    // Math Captcha Validation
+    const expectedAnswer = mathCaptcha.num1 + mathCaptcha.num2;
+    if (!mathCaptcha.answer) {
+      errs.captcha = "Please answer the security question.";
+    } else if (parseInt(mathCaptcha.answer) !== expectedAnswer) {
+      errs.captcha = "Incorrect answer. Please try again.";
+      generateCaptcha();
+      setMathCaptcha(prev => ({...prev, answer: ''}));
+    }
+    
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
 
     setIsSubmitting(true);
     const formData = new FormData();
     formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.append("h-captcha-response", captchaToken);
     formData.append("subject", "New Registration / Inquiry for IPCI 2027");
     formData.append("from_name", "IPCI 2027 Website");
     formData.append("Name", form.name);
@@ -987,13 +1009,26 @@ function ContactSection() {
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 resize-none" />
                     </div>
 
-                    <div className="flex flex-col gap-1.5 items-center justify-center my-2">
-                      <HCaptcha
-                        sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-                        onVerify={(token) => { setCaptchaToken(token); setErrors((prev) => ({...prev, captcha: null})); }}
-                        onExpire={() => setCaptchaToken("")}
-                      />
-                      {errors.captcha && <p className="text-xs text-red-500 font-medium text-center">{errors.captcha}</p>}
+                    <div className="flex flex-col gap-1.5 items-center justify-center my-4">
+                      <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">
+                        Security Check
+                      </label>
+                      <div className="flex items-center gap-3 w-full sm:w-2/3">
+                        <div className="flex-1 bg-slate-100 rounded-xl px-4 py-3 text-center text-sm font-black text-[#0B1E4A] tracking-wider border border-slate-200">
+                          {mathCaptcha.num1} + {mathCaptcha.num2} = ?
+                        </div>
+                        <input 
+                          type="number"
+                          placeholder="Answer" 
+                          value={mathCaptcha.answer}
+                          onChange={(e) => {
+                            setMathCaptcha(prev => ({...prev, answer: e.target.value}));
+                            if (errors.captcha) setErrors(prev => ({...prev, captcha: null}));
+                          }}
+                          className={`flex-1 px-4 py-3 rounded-xl border text-sm font-bold text-center text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 ${errors.captcha ? 'border-red-300 bg-red-50/40' : 'border-slate-200'}`}
+                        />
+                      </div>
+                      {errors.captcha && <p className="text-xs text-red-500 font-medium text-center mt-1">{errors.captcha}</p>}
                     </div>
 
                     <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed">
