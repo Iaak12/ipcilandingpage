@@ -31,7 +31,7 @@ const SPONSORS = [
     icon: Award,
     color: "amber",
     items: [
-      { name: "VCPCRF Founders' Contribution", amount: 6000000, subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/logos/sponsor/vaidyachandraprakash.jpeg" }
+      { name: "VCPCRF Founders' Contribution", amount: 6000000, subtitle: "Vaidya Chandra Prakash Cancer Research Foundation", logo: "/sponsor/vaidyachandraprakash.jpeg" }
     ]
   },
   {
@@ -39,7 +39,7 @@ const SPONSORS = [
     icon: Building,
     color: "blue",
     items: [
-      { name: "Zandu Care", amount: 250000, subtitle: "Silver Sponsor", logo: "/logos/sponsor/zandu.jpeg" },
+      { name: "Zandu Care", amount: 250000, subtitle: "Silver Sponsor", logo: "/sponsor/zandu.jpeg" },
       { name: "Sudhir Cranes Pvt Ltd", amount: 51000, subtitle: "Industry Sponsor" },
       { name: "Venus Stampings Pvt. Ltd.", amount: 50000, subtitle: "VENUS" },
       { name: "ND R.F.M.", amount: 31000, subtitle: "" },
@@ -51,7 +51,7 @@ const SPONSORS = [
     color: "rose",
     items: [
       { name: "Dr Neeraj Gupta, Rishikesh", amount: 250000, subtitle: "" },
-      { name: "Atharva Ayurveda, Rajkot", amount: 150000, subtitle: "", logo: "/logos/sponsor/atharva.jpeg" },
+      { name: "Atharva Ayurveda, Rajkot", amount: 150000, subtitle: "", logo: "/sponsor/atharva.jpeg" },
       { name: "Dr C K Katiyar, Gurugram", amount: 100000, subtitle: "" },
       { name: "Prof (Dr) G. G. Gangadharan, Bangalore", amount: 100000, subtitle: "" },
       { name: "SL Ayucare Wellness Center, Rampur", amount: 50000, subtitle: "" },
@@ -70,7 +70,7 @@ const SPONSORS = [
     color: "emerald",
     items: [
       { name: "R B Ayurvedic Medical College", amount: 250000, subtitle: "Agra" },
-      { name: "Uttaranchal Ayurvedic College", amount: 151000, subtitle: "Dehradun", logo: "/logos/sponsor/utranchalmedicalcollege.jpeg" }
+      { name: "Uttaranchal Ayurvedic College", amount: 151000, subtitle: "Dehradun", logo: "/sponsor/utranchalmedicalcollege.jpeg" }
     ]
   },
   {
