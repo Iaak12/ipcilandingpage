@@ -50,6 +50,7 @@ const SPONSORS = [
     icon: ShieldCheck,
     color: "rose",
     items: [
+      { name: "Dr Neeraj Gupta, Rishikesh", amount: 250000, subtitle: "" },
       { name: "Atharva Ayurveda, Rajkot", amount: 150000, subtitle: "", logo: "/logos/atharva.png" },
       { name: "Dr C K Katiyar, Gurugram", amount: 100000, subtitle: "" },
       { name: "Prof (Dr) G. G. Gangadharan, Bangalore", amount: 100000, subtitle: "" },
