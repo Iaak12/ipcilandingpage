@@ -166,8 +166,7 @@ export default function AbstractSubmissionForm({ inModal = false, onClose = () =
             {isSubmitting ? 'Submitting...' : 'Submit Abstract'}
           </button>
           <p className="text-center text-xs text-slate-400">
-            By submitting, you agree to be contacted about IPCI 2027.<br />
-            *For institutional registrations
+            By submitting, you agree to be contacted about IPCI 2027.
           </p>
         </form>
       )}
