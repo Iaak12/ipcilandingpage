@@ -18,7 +18,7 @@ const REGISTRATION_FEES = {
     { id: 'ug', label: 'Undergraduate Students', early: 2000, regular: 3000, spot: 4000 },
     { id: 'pg', label: 'Postgraduate Students', early: 3000, regular: 4000, spot: 5000 },
     { id: 'phd', label: 'PhD Scholars / Research Fellows', early: 3500, regular: 4500, spot: 5500 },
-    { id: 'faculty', label: 'Faculty / Practitioners', early: 1, regular: 7500, spot: 9000 },
+    { id: 'faculty', label: 'Faculty / Practitioners', early: 6000, regular: 7500, spot: 9000 },
     { id: 'industry', label: 'Industry Delegates', early: 12000, regular: 15000, spot: 18000 },
     { id: 'institutional', label: 'Institutional Delegation (5 Delegates)', early: 25000, regular: 30000, spot: null }
   ],
