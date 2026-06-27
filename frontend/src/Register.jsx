@@ -678,7 +678,8 @@ export default function Register() {
                     {isSubmitting ? 'Submitting...' : 'Confirm Registration'}
                   </button>
                   <p className="text-center text-xs text-slate-400">
-                    By submitting, you agree to the registration terms and conditions.
+                    By submitting, you agree to the registration terms and conditions.<br />
+                    *For institutional registrations
                   </p>
                 </form>
               )}

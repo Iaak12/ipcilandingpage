@@ -1036,7 +1036,8 @@ function ContactSection() {
                       {isSubmitting ? 'Submitting...' : 'Submit Registration'}
                     </button>
                     <p className="text-center text-xs text-slate-400">
-                      By submitting, you agree to be contacted about IPCI 2027.
+                      By submitting, you agree to be contacted about IPCI 2027.<br />
+                      *For institutional registrations
                     </p>
                   </form>
                 )}
