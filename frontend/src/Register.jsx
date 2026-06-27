@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Navbar, Footer } from './App.jsx';
+import AbstractSubmissionForm from './AbstractSubmissionForm.jsx';
 import {
   CalendarDays, MapPin, ArrowLeft, ArrowRight,
   CheckCircle, Users, Award, FileText, Globe, Info,
@@ -46,6 +47,7 @@ export default function Register() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAbstractModalOpen, setIsAbstractModalOpen] = useState(false);
 
   // Simple Math Captcha State
   const [mathCaptcha, setMathCaptcha] = useState({ num1: 0, num2: 0, answer: '' });
@@ -619,9 +621,17 @@ export default function Register() {
                     <CheckCircle size={36} className="text-white" />
                   </div>
                   <h3 className="text-2xl font-black text-[#0B1E4A] mb-3">Thank You!</h3>
-                  <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your registration details have been received. We'll be in touch with you shortly.</p>
-                  <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', designation: '', institution: '', message: '' }); setMathCaptcha({num1:0,num2:0,answer:''}); generateCaptcha(); setIsModalOpen(false); }}
-                    className="btn-outline mt-6 mx-auto">Close</button>
+                  <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your registration details have been received and your payment was successful. We'll be in touch with you shortly.</p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                    <button onClick={() => setIsAbstractModalOpen(true)} className="btn-primary">
+                      Submit Abstract
+                    </button>
+                    <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', designation: '', institution: '', message: '' }); setMathCaptcha({num1:0,num2:0,answer:''}); generateCaptcha(); setIsModalOpen(false); }}
+                      className="btn-outline">
+                      Close
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-5 mt-2">
@@ -687,6 +697,20 @@ export default function Register() {
                 </form>
               )}
               </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Abstract Submission Modal */}
+      <AnimatePresence>
+        {isAbstractModalOpen && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsAbstractModalOpen(false)}
+              className="absolute inset-0 bg-[#0B1E4A]/80 backdrop-blur-sm" />
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl flex justify-center z-10">
+              <AbstractSubmissionForm inModal={true} onClose={() => setIsAbstractModalOpen(false)} />
             </motion.div>
           </div>
         )}
