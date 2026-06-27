@@ -841,7 +841,7 @@ function ParticipantsSection() {
 
 function ContactSection() {
   const [ref, inView] = useInView(0.1);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', message: '' });
+  const [form, setForm] = useState({ name: '', designation: '', affiliation: '', email: '', phone: '', abstractTitle: '', abstract: '' });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -863,9 +863,12 @@ function ContactSection() {
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Name is required';
+    if (!form.designation.trim()) e.designation = 'Designation is required';
+    if (!form.affiliation.trim()) e.affiliation = 'Affiliation is required';
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Valid email required';
-    if (!form.phone.trim()) e.phone = 'Phone is required';
-    if (!form.profession.trim()) e.profession = 'Profession is required';
+    if (!form.phone.trim()) e.phone = 'Contact number is required';
+    if (!form.abstractTitle.trim()) e.abstractTitle = 'Abstract Title is required';
+    if (!form.abstract.trim()) e.abstract = 'Abstract is required';
     return e;
   };
 
@@ -893,12 +896,12 @@ function ContactSection() {
     formData.append("subject", "New Registration / Inquiry for IPCI 2027");
     formData.append("from_name", "IPCI 2027 Website");
     formData.append("Name", form.name);
+    formData.append("Designation", form.designation);
+    formData.append("Affiliation", form.affiliation);
     formData.append("Email", form.email);
     formData.append("Phone", form.phone);
-    formData.append("Profession", form.profession);
-    if (form.message.trim()) {
-      formData.append("Message", form.message);
-    }
+    formData.append("Abstract_Title", form.abstractTitle);
+    formData.append("Abstract", form.abstract);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -977,21 +980,23 @@ function ContactSection() {
                       <CheckCircle size={36} className="text-white" />
                     </div>
                     <h3 className="text-2xl font-black text-[#0B1E4A] mb-3">Thank You!</h3>
-                    <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your interest has been registered. We'll be in touch with more details about IPCI 2027 soon.</p>
-                    <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', profession: '', message: '' }); setCaptchaToken(""); }}
+                    <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your abstract has been submitted successfully. We will be in touch with you shortly.</p>
+                    <button onClick={() => { setSubmitted(false); setForm({ name: '', designation: '', affiliation: '', email: '', phone: '', abstractTitle: '', abstract: '' }); setMathCaptcha({num1:0,num2:0,answer:''}); generateCaptcha(); }}
                       className="btn-outline mt-6 mx-auto">Submit Another</button>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate className="space-y-5">
-                    <h3 className="text-xl font-black text-[#0B1E4A] mb-1">Register Your Interest</h3>
-                    <p className="text-slate-500 text-sm mb-4">Be among the first to receive updates and registration details.</p>
+                    <h3 className="text-xl font-black text-[#0B1E4A] mb-1">Abstract Submission Form</h3>
+                    <p className="text-slate-500 text-sm mb-4">Please fill out the form below to submit your abstract.</p>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       {[
-                        { id: 'name', label: 'Name/ Name of institute*', type: 'text', placeholder: 'Dr. John Doe' },
-                        { id: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com' },
-                        { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 98XXX XXXXX' },
-                        { id: 'profession', label: 'Profession / Specialty', type: 'text', placeholder: 'Gastroenterologist' },
+                        { id: 'name', label: 'Name', type: 'text', placeholder: 'Dr. John Doe' },
+                        { id: 'designation', label: 'Designation', type: 'text', placeholder: 'e.g. Professor' },
+                        { id: 'affiliation', label: 'Affiliation', type: 'text', placeholder: 'e.g. University Name' },
+                        { id: 'email', label: 'Email id', type: 'email', placeholder: 'john@example.com' },
+                        { id: 'phone', label: 'Contact number', type: 'tel', placeholder: '+91 98XXX XXXXX' },
+                        { id: 'abstractTitle', label: 'Abstract Title', type: 'text', placeholder: 'Title of your abstract' },
                       ].map(({ id, label, type, placeholder }) => (
                         <div key={id} className="flex flex-col gap-1.5">
                           <label htmlFor={id} className="text-xs font-bold text-slate-600 uppercase tracking-wider">{label}</label>
@@ -1004,10 +1009,11 @@ function ContactSection() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="message" className="text-xs font-bold text-slate-600 uppercase tracking-wider">Message (Optional)</label>
-                      <textarea id="message" rows={4} placeholder="Any questions or specific topics you'd like to see addressed..."
-                        value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 resize-none" />
+                      <label htmlFor="abstract" className="text-xs font-bold text-slate-600 uppercase tracking-wider">Abstract (250 words)</label>
+                      <textarea id="abstract" rows={6} placeholder="Paste your abstract here (max 250 words)..."
+                        value={form.abstract} onChange={(e) => setForm({ ...form, abstract: e.target.value })}
+                        className={`w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 resize-none ${errors.abstract ? 'border-red-300 bg-red-50/40' : 'border-slate-200'}`} />
+                      {errors.abstract && <p className="text-xs text-red-500 font-medium">{errors.abstract}</p>}
                     </div>
 
                     <div className="flex flex-col gap-1.5 items-center justify-center my-4">
@@ -1034,7 +1040,7 @@ function ContactSection() {
 
                     <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed">
                       {isSubmitting ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
-                      {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+                      {isSubmitting ? 'Submitting...' : 'Submit Abstract'}
                     </button>
                     <p className="text-center text-xs text-slate-400">
                       By submitting, you agree to be contacted about IPCI 2027.<br />
