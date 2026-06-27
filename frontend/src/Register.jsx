@@ -605,10 +605,13 @@ export default function Register() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsModalOpen(false)}
               className="absolute inset-0 bg-[#0B1E4A]/80 backdrop-blur-sm" />
             <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass rounded-3xl p-6 sm:p-8 border border-white shadow-2xl shadow-emerald-900/50">
-              <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 p-2 rounded-xl hover:bg-slate-100 transition-colors z-10">
-                <X size={20} className="text-slate-500" />
-              </button>
+              className="relative w-full max-w-2xl max-h-[90vh] glass rounded-3xl border border-white shadow-2xl shadow-emerald-900/50 flex flex-col overflow-hidden">
+              <div className="absolute top-4 right-4 z-20">
+                <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-xl bg-white/50 hover:bg-slate-100 backdrop-blur-sm transition-colors shadow-sm">
+                  <X size={20} className="text-slate-500" />
+                </button>
+              </div>
+              <div className="overflow-y-auto w-full h-full p-6 sm:p-8 modal-scrollbar">
 
               {submitted ? (
                 <div className="text-center py-12">
@@ -683,6 +686,7 @@ export default function Register() {
                   </p>
                 </form>
               )}
+              </div>
             </motion.div>
           </div>
         )}

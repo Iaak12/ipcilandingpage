@@ -86,12 +86,15 @@ export default function AbstractSubmissionForm({ inModal = false, onClose = () =
   };
 
   return (
-    <div className={inModal ? "relative w-full max-w-2xl max-h-[90vh] overflow-y-auto glass rounded-3xl p-6 sm:p-8 border border-white shadow-2xl shadow-emerald-900/50" : "glass rounded-3xl p-7 sm:p-10 border border-white shadow-2xl shadow-emerald-50"}>
+    <div className={inModal ? "relative w-full max-w-2xl max-h-[90vh] glass rounded-3xl border border-white shadow-2xl shadow-emerald-900/50 flex flex-col overflow-hidden" : "glass rounded-3xl p-7 sm:p-10 border border-white shadow-2xl shadow-emerald-50"}>
       {inModal && (
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-xl hover:bg-slate-100 transition-colors z-10">
-          <X size={20} className="text-slate-500" />
-        </button>
+        <div className="absolute top-4 right-4 z-20">
+          <button onClick={onClose} className="p-2 rounded-xl bg-white/50 hover:bg-slate-100 backdrop-blur-sm transition-colors shadow-sm">
+            <X size={20} className="text-slate-500" />
+          </button>
+        </div>
       )}
+      <div className={inModal ? "overflow-y-auto w-full h-full p-6 sm:p-8 modal-scrollbar" : ""}>
       
       {submitted ? (
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}
@@ -170,6 +173,7 @@ export default function AbstractSubmissionForm({ inModal = false, onClose = () =
           </p>
         </form>
       )}
+      </div>
     </div>
   );
 }
