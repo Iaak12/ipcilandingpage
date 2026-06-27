@@ -349,7 +349,7 @@ function HeroSection() {
           </div>
           <div className="flex items-center gap-2.5 glass px-5 py-3 rounded-2xl shadow-sm">
             <MapPin size={20} className="text-sky-500 shrink-0" />
-            <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Gandhi Auditorium, GB Pant University, Pantnagar, Uttarakhand</span>
+            <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Gandhi Hall, Pantnagar University, Uttarakhand, India</span>
           </div>
         </motion.div>
 
@@ -942,7 +942,8 @@ function ContactSection() {
               {[
                 { icon: Phone, label: 'Phone', lines: ['+91 82180 59289', '+91 97585 09973'], href: 'tel:+918218059289' },
                 { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'balenduprakash@gmail.com'], href: 'mailto:info@ipci2027.co.in' },
-                { icon: MapPin, label: 'Venue', lines: ['Gandhi Auditorium, GB Pant University', 'Pantnagar, Uttarakhand', '12–14 February 2027'], href: null },
+                { icon: MapPin, label: 'Office', lines: ['Prakash Villa, NH 74, Danpur Area', 'Rudrapur, Uttarakhand – 263153', 'Organized by: VCPC Research Foundation'], href: null },
+                { icon: MapPin, label: 'Venue', lines: ['Gandhi Hall, Pantnagar University', 'Uttarakhand, India', '12–14 February 2027'], href: null },
                 { icon: Globe, label: 'Website', lines: ['www.ipci2027.co.in'], href: 'https://www.ipci2027.co.in' },
               ].map(({ icon: Icon, label, lines, href }, i) => (
                 <motion.div key={i} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}
@@ -1148,8 +1149,12 @@ export function Footer() {
                 <a href="mailto:info@ipci2027.co.in" className="hover:text-sky-400 transition-colors break-all">info@ipci2027.co.in</a>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin size={13} className="text-emerald-400 shrink-0 mt-0.5" />
-                <span>Gandhi Auditorium, GB Pant University,<br/>Pantnagar, Uttarakhand</span>
+                <MapPin size={13} className="text-emerald-400 shrink-0 mt-1" />
+                <div className="flex flex-col gap-1 text-xs">
+                  <p><strong>Office:</strong> Prakash Villa, NH 74, Danpur Area, Rudrapur, Uttarakhand – 263153</p>
+                  <p><strong>Organized by:</strong> VCPC Research Foundation</p>
+                  <p><strong>Venue:</strong> Gandhi Hall, Pantnagar University, Uttarakhand, India</p>
+                </div>
               </li>
             </ul>
           </div>
