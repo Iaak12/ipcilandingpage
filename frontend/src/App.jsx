@@ -26,10 +26,8 @@ const ADVISORY_BOARD = [
 
 export const NAV_LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Vision', href: '#vision-aim' },
   { label: 'Themes', href: '#themes' },
   { label: 'Objectives', href: '#objectives' },
-  { label: 'Scope', href: '#scope' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Participants', href: '#participants' },
   { label: 'Sponsors', href: '#sponsors' },
