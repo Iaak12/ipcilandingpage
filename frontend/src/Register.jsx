@@ -42,7 +42,7 @@ const getCurrentPhase = () => {
 
 export default function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', profession: '', designation: '', institution: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -107,6 +107,8 @@ export default function Register() {
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Valid email required';
     if (!form.phone.trim()) e.phone = 'Phone is required';
     if (!form.profession.trim()) e.profession = 'Profession is required';
+    if (!form.designation.trim()) e.designation = 'Designation is required';
+    if (!form.institution.trim()) e.institution = 'Institution is required';
     return e;
   };
 
@@ -133,6 +135,8 @@ export default function Register() {
     formData.append("Email", form.email);
     formData.append("Phone", form.phone);
     formData.append("Profession", form.profession);
+    formData.append("Designation", form.designation);
+    formData.append("Institution", form.institution);
     formData.append("Category", categoryData.label);
     formData.append("Amount Paid", `${currency === 'INR' ? '₹' : '$'}${currentPrice.toLocaleString('en-IN')}`);
     formData.append("Payment Status", "Successful");
@@ -617,7 +621,7 @@ export default function Register() {
                   </div>
                   <h3 className="text-2xl font-black text-[#0B1E4A] mb-3">Thank You!</h3>
                   <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Your registration details have been received. We'll be in touch with you shortly.</p>
-                  <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', profession: '', message: '' }); setCaptchaToken(""); setIsModalOpen(false); }}
+                  <button onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', profession: '', designation: '', institution: '', message: '' }); setMathCaptcha({num1:0,num2:0,answer:''}); generateCaptcha(); setIsModalOpen(false); }}
                     className="btn-outline mt-6 mx-auto">Close</button>
                 </div>
               ) : (
@@ -629,10 +633,12 @@ export default function Register() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     {[
-                      { id: 'name', label: 'Name/ Name of institute*', type: 'text', placeholder: 'Dr. John Doe' },
-                      { id: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com' },
-                      { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 98XXX XXXXX' },
-                      { id: 'profession', label: 'Profession / Specialty', type: 'text', placeholder: 'Gastroenterologist' },
+                      { id: 'name', label: 'Name*', type: 'text', placeholder: 'Dr. John Doe' },
+                      { id: 'designation', label: 'Designation*', type: 'text', placeholder: 'e.g. Professor' },
+                      { id: 'institution', label: 'Institution*', type: 'text', placeholder: 'e.g. University Name' },
+                      { id: 'email', label: 'Email Address*', type: 'email', placeholder: 'john@example.com' },
+                      { id: 'phone', label: 'Phone Number*', type: 'tel', placeholder: '+91 98XXX XXXXX' },
+                      { id: 'profession', label: 'Profession / Specialty*', type: 'text', placeholder: 'Gastroenterologist' },
                     ].map(({ id, label, type, placeholder }) => (
                       <div key={id} className="flex flex-col gap-1.5">
                         <label htmlFor={`reg-${id}`} className="text-xs font-bold text-slate-600 uppercase tracking-wider">{label}</label>
