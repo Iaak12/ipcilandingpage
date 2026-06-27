@@ -106,8 +106,6 @@ export default function Register() {
     if (!form.name.trim()) e.name = 'Name is required';
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Valid email required';
     if (!form.phone.trim()) e.phone = 'Phone is required';
-    if (!form.designation.trim()) e.designation = 'Designation is required';
-    if (!form.institution.trim()) e.institution = 'Institution is required';
     return e;
   };
 
@@ -632,8 +630,8 @@ export default function Register() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     {[
                       { id: 'name', label: 'Name*', type: 'text', placeholder: 'Dr. John Doe' },
-                      { id: 'designation', label: 'Designation*', type: 'text', placeholder: 'e.g. Professor' },
-                      { id: 'institution', label: 'Institution*', type: 'text', placeholder: 'e.g. University Name' },
+                      { id: 'designation', label: 'Designation', type: 'text', placeholder: 'e.g. Professor' },
+                      { id: 'institution', label: 'Institution', type: 'text', placeholder: 'e.g. University Name' },
                       { id: 'email', label: 'Email Address*', type: 'email', placeholder: 'john@example.com' },
                       { id: 'phone', label: 'Phone Number*', type: 'tel', placeholder: '+91 98XXX XXXXX' },
                     ].map(({ id, label, type, placeholder }) => (
