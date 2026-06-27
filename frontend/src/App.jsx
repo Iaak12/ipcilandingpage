@@ -349,7 +349,7 @@ function HeroSection() {
           </div>
           <div className="flex items-center gap-2.5 glass px-5 py-3 rounded-2xl shadow-sm">
             <MapPin size={20} className="text-sky-500 shrink-0" />
-            <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Gandhi Hall, Pantnagar University, Uttarakhand, India</span>
+            <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Gandhi Auditorium, GB Pant University, Pantnagar, Uttarakhand</span>
           </div>
         </motion.div>
 
@@ -942,7 +942,7 @@ function ContactSection() {
               {[
                 { icon: Phone, label: 'Phone', lines: ['+91 98370 28544', '+91 79833 92736'], href: 'tel:+919837028544' },
                 { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'balenduprakash@gmail.com'], href: 'mailto:info@ipci2027.co.in' },
-                { icon: MapPin, label: 'Venue', lines: ['Gandhi Hall, Pantnagar University', 'Uttarakhand, India', '12–14 February 2027'], href: null },
+                { icon: MapPin, label: 'Venue', lines: ['Gandhi Auditorium, GB Pant University', 'Pantnagar, Uttarakhand', '12–14 February 2027'], href: null },
                 { icon: Globe, label: 'Website', lines: ['www.ipci2027.co.in'], href: 'https://www.ipci2027.co.in' },
               ].map(({ icon: Icon, label, lines, href }, i) => (
                 <motion.div key={i} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}
@@ -1149,7 +1149,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={13} className="text-emerald-400 shrink-0 mt-0.5" />
-                <span>Gandhi Hall, Pantnagar University,<br/>Uttarakhand, India</span>
+                <span>Gandhi Auditorium, GB Pant University,<br/>Pantnagar, Uttarakhand</span>
               </li>
             </ul>
           </div>

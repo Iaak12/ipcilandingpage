@@ -246,7 +246,7 @@ export default function Register() {
               </div>
               <div className="flex items-center gap-2.5 glass px-5 py-3 rounded-2xl shadow-sm">
                 <MapPin size={20} className="text-sky-500 shrink-0" />
-                <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Pantnagar University, Uttarakhand, India</span>
+                <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">Gandhi Auditorium, GB Pant University, Pantnagar, Uttarakhand</span>
               </div>
             </div>
 
