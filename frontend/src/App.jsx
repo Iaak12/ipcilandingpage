@@ -940,7 +940,7 @@ function ContactSection() {
             {/* Contact Info */}
             <motion.div variants={fadeUp} className="lg:col-span-2 space-y-5">
               {[
-                { icon: Phone, label: 'Phone', lines: ['+91 98370 28544', '+91 79833 92736'], href: 'tel:+919837028544' },
+                { icon: Phone, label: 'Phone', lines: ['+91 82180 59289', '+91 97585 09973'], href: 'tel:+918218059289' },
                 { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'balenduprakash@gmail.com'], href: 'mailto:info@ipci2027.co.in' },
                 { icon: MapPin, label: 'Venue', lines: ['Gandhi Auditorium, GB Pant University', 'Pantnagar, Uttarakhand', '12–14 February 2027'], href: null },
                 { icon: Globe, label: 'Website', lines: ['www.ipci2027.co.in'], href: 'https://www.ipci2027.co.in' },
@@ -1137,11 +1137,11 @@ export function Footer() {
             <ul className="space-y-3 text-slate-400 text-sm">
               <li className="flex items-center gap-2">
                 <Phone size={13} className="text-emerald-400 shrink-0" />
-                <a href="tel:+919837028544" className="hover:text-emerald-400 transition-colors">+91 98370 28544</a>
+                <a href="tel:+918218059289" className="hover:text-emerald-400 transition-colors">+91 82180 59289</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={13} className="text-emerald-400 shrink-0" />
-                <a href="tel:+917983392736" className="hover:text-emerald-400 transition-colors">+91 79833 92736</a>
+                <a href="tel:+919758509973" className="hover:text-emerald-400 transition-colors">+91 97585 09973</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={13} className="text-sky-400 shrink-0" />
