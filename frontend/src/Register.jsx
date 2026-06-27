@@ -629,7 +629,7 @@ export default function Register() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     {[
-                      { id: 'name', label: 'Full Name', type: 'text', placeholder: 'Dr. John Doe' },
+                      { id: 'name', label: 'Name/ Name of institute*', type: 'text', placeholder: 'Dr. John Doe' },
                       { id: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com' },
                       { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 98XXX XXXXX' },
                       { id: 'profession', label: 'Profession / Specialty', type: 'text', placeholder: 'Gastroenterologist' },
