@@ -292,7 +292,7 @@ export function Navbar() {
                   </a>
                 ))}
               </nav>
-              <button onClick={() => { setIsAbstractModalOpen(true); setOpen(false); }} className="btn-outline border-white/30 text-white hover:bg-white/10 mt-4 justify-center py-3 w-full">
+              <button onClick={() => { setIsAbstractModalOpen(true); setOpen(false); }} className="border-2 border-white/40 text-white hover:bg-white/10 mt-4 flex items-center justify-center font-bold rounded-xl py-3 w-full transition-all">
                 Abstract Submission
               </button>
               <Link to="/register" onClick={() => setOpen(false)} className="btn-primary mt-3 justify-center py-3 w-full">
