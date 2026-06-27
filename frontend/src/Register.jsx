@@ -659,8 +659,8 @@ export default function Register() {
                     <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">
                       Security Check
                     </label>
-                    <div className="flex items-center gap-3 w-full sm:w-2/3">
-                      <div className="flex-1 bg-slate-100 rounded-xl px-4 py-3 text-center text-sm font-black text-[#0B1E4A] tracking-wider border border-slate-200">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-3/4 mx-auto">
+                      <div className="flex-1 whitespace-nowrap bg-slate-100 rounded-xl px-4 py-3 text-center text-sm font-black text-[#0B1E4A] tracking-wider border border-slate-200">
                         {mathCaptcha.num1} + {mathCaptcha.num2} = ?
                       </div>
                       <input 
