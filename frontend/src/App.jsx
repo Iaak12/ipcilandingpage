@@ -1098,6 +1098,10 @@ export function Footer() {
                 <Mail size={13} className="text-sky-400 shrink-0" />
                 <a href="mailto:info@ipci2027.co.in" className="hover:text-sky-400 transition-colors break-all">info@ipci2027.co.in</a>
               </li>
+              <li className="flex items-center gap-2">
+                <Mail size={13} className="text-sky-400 shrink-0" />
+                <a href="mailto:ipci2027@gmail.com" className="hover:text-sky-400 transition-colors break-all">ipci2027@gmail.com</a>
+              </li>
               <li className="flex items-start gap-2">
                 <MapPin size={13} className="text-emerald-400 shrink-0 mt-1" />
                 <div className="flex flex-col gap-1 text-xs">
@@ -1114,6 +1118,8 @@ export function Footer() {
           <p>© {new Date().getFullYear()} IPCI 2027 — International Pancreatitis Conclave India. All rights reserved.</p>
           <p>
             <a href="mailto:info@ipci2027.co.in" className="text-emerald-400 hover:text-emerald-300 transition-colors font-semibold">info@ipci2027.co.in</a>
+            {' · '}
+            <a href="mailto:ipci2027@gmail.com" className="text-emerald-400 hover:text-emerald-300 transition-colors font-semibold">ipci2027@gmail.com</a>
           </p>
         </div>
       </div>
