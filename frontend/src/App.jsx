@@ -964,7 +964,7 @@ function ContactSection() {
             <motion.div variants={fadeUp} className="lg:col-span-2 space-y-5">
               {[
                 { icon: Phone, label: 'Phone', lines: ['+91 82180 59289', '+91 97585 09973'], href: 'tel:+918218059289' },
-                { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'balenduprakash@gmail.com'], href: 'mailto:info@ipci2027.co.in' },
+                { icon: Mail, label: 'Email', lines: ['info@ipci2027.co.in', 'balenduprakash@gmail.com', 'ipci2027@gmail.com'], href: 'mailto:info@ipci2027.co.in' },
                 { icon: MapPin, label: 'Office', lines: ['Prakash Villa, NH 74, Danpur Area', 'Rudrapur, Uttarakhand – 263153', 'Organized by: VCPC Research Foundation'], href: null },
                 { icon: MapPin, label: 'Venue', lines: ['Gandhi Hall, Pantnagar University', 'Uttarakhand, India', '12–14 February 2027'], href: null },
                 { icon: Globe, label: 'Website', lines: ['www.ipci2027.co.in'], href: 'https://www.ipci2027.co.in' },
@@ -1133,11 +1133,12 @@ function FloatingActions() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-center">
       <motion.a
-        href="mailto:info@ipci2027.co.in"
+        href="mailto:ipci2027@gmail.com"
         initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.05 }}
         className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center shadow-xl shadow-sky-500/30 hover:shadow-sky-500/50 transition-all hover:-translate-y-1"
-        aria-label="Email Us"
+        aria-label="Email Us: ipci2027@gmail.com"
+        title="ipci2027@gmail.com"
       >
         <Mail size={22} className="text-white" />
       </motion.a>
