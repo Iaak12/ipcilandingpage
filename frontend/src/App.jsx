@@ -1056,6 +1056,9 @@ export function Footer() {
               <a href="https://conferencealerts.co.in/" target="_blank" rel="noopener noreferrer" className="block hover:opacity-90 transition-opacity">
                 <img src="/Conference%20Alerts%20(1).png" alt="Conference Alerts" className="h-12 w-auto object-contain bg-white/95 px-2 py-1.5 rounded-lg shadow-sm" />
               </a>
+              <a href="https://conferencenext.com/" target="_blank" rel="noopener noreferrer" className="block hover:opacity-90 transition-opacity">
+                <img src="/Confrencenext.png" alt="ConferenceNext" className="h-12 w-auto object-contain bg-white/95 px-2 py-1.5 rounded-lg shadow-sm" />
+              </a>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               Bridging Evidence, Innovation and Integrative Care in Pancreatitis.
