@@ -20,8 +20,38 @@ const WEB3FORMS_ACCESS_KEY = "045af9f2-df45-4afd-bacb-f59ed567d070";
 const ADVISORY_BOARD = [
   {
     id: 1,
+    name: "Dr. S. K. Sarin",
+    image: "/Dr. S. K. Sarin.jpeg",
+    role: "Chair, National Academic Advisory Board",
+    desc: "Visionary Leader • Eminent Hepatologist • Guiding Academia"
+  },
+  {
+    id: 2,
+    name: "Mr. Rajiv Kumar",
+    image: "/MR. RAJIV KUMAR.jpeg",
+    role: "Member, National Advisory Board",
+    desc: "Former Vice Chairman, NITI Aayog; Chairman, Pahle India Foundation"
+  },
+  {
+    id: 3,
+    name: "Prof. Heiko Witt",
+    image: "/PROF. HEIKO WITT.jpeg",
+    role: "Member, International Advisory Board",
+    desc: "MD, PhD. Mainz University Medical Center, Germany"
+  },
+  {
+    id: 4,
+    name: "Dr. Suversha Khanna",
+    image: "/DR. SUVERSHA KHANNA.jpeg",
+    role: "Member, National Advisory Board",
+    desc: "President, Dharamshila Cancer Foundation & Research Centre, New Delhi"
+  },
+  {
+    id: 5,
     name: "Prof. Dr. Asbjørn Mohr Drewes",
-    image: "/guest1.jpeg"
+    image: "/guest1.jpeg",
+    role: "Member, International Advisory Board",
+    desc: "Global Pancreatology Leader, Denmark"
   }
 ];
 
@@ -798,14 +828,21 @@ function AdvisoryBoardSection() {
           <motion.div variants={fadeUp} className="text-center mb-14">
             <SectionTag icon={Globe}>Global Leaders</SectionTag>
             <h2 className="text-4xl sm:text-5xl font-black text-[#0B1E4A] mt-2">
-              International <span className="gradient-text-green">Advisory Board</span>
+              <span className="gradient-text-green">Advisory Board</span>
             </h2>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 min-h-[200px]">
+          <div className="flex flex-wrap justify-center gap-8 min-h-[200px]">
             {ADVISORY_BOARD.map((member) => (
-              <motion.div key={member.id} variants={fadeUp} className="w-full max-w-[320px] bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300">
-                <img src={member.image} alt={member.name} className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-500" />
+              <motion.div key={member.id} variants={fadeUp} className="w-full max-w-[340px] bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300 group flex flex-col">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-100">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top group-hover:scale-[1.05] transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex flex-col flex-1 text-center bg-gradient-to-b from-white to-slate-50">
+                  <h3 className="text-xl font-black text-[#0B1E4A] mb-1">{member.name}</h3>
+                  <p className="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">{member.role}</p>
+                  <p className="text-slate-600 text-sm font-medium leading-relaxed">{member.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
