@@ -49,7 +49,7 @@ const ADVISORY_BOARD = [
   {
     id: 5,
     name: "Prof. Dr. Asbjørn Mohr Drewes",
-    image: "/guest1.jpeg",
+    image: "/Prof. Dr. Asbjørn Mohr Drewes.jpeg",
     role: "Member, International Advisory Board",
     desc: "Global Pancreatology Leader, Denmark"
   }
