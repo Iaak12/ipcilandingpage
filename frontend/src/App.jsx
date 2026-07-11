@@ -34,17 +34,17 @@ const ADVISORY_BOARD = [
   },
   {
     id: 3,
-    name: "Prof. Heiko Witt",
-    image: "/PROF. HEIKO WITT.jpeg",
-    role: "Member, International Advisory Board",
-    desc: "MD, PhD. Mainz University Medical Center, Germany"
-  },
-  {
-    id: 4,
     name: "Dr. Suversha Khanna",
     image: "/DR. SUVERSHA KHANNA.jpeg",
     role: "Member, National Advisory Board",
     desc: "President, Dharamshila Cancer Foundation & Research Centre, New Delhi"
+  },
+  {
+    id: 4,
+    name: "Prof. Heiko Witt",
+    image: "/PROF. HEIKO WITT.jpeg",
+    role: "Member, International Advisory Board",
+    desc: "MD, PhD. Mainz University Medical Center, Germany"
   },
   {
     id: 5,
