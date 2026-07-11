@@ -365,12 +365,12 @@ function HeroSection() {
       <div className="max-w-6xl mx-auto w-full text-center relative z-10">
         {/* Live badge */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 glass px-5 py-2 rounded-full shadow-lg shadow-emerald-100 mb-8 border border-emerald-100">
+          className="inline-flex items-center gap-2 glass px-5 py-2 rounded-full shadow-lg shadow-emerald-100 mb-8 border border-emerald-200">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
           </span>
-          <span className="text-xs font-bold text-slate-700 uppercase tracking-widest">Registrations Opening Soon</span>
+          <span className="text-xs font-bold text-emerald-700 uppercase tracking-widest">🎉 Registrations Open</span>
         </motion.div>
 
         {/* Main Headline */}
@@ -418,7 +418,7 @@ function HeroSection() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+          className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
           <Link to="/register" className="btn-primary text-base px-8 py-4 justify-center">
             Register Now <ArrowRight size={18} />
           </Link>
@@ -426,6 +426,26 @@ function HeroSection() {
             className="btn-outline text-base px-8 py-4 justify-center">
             View Agenda <BookOpen size={18} />
           </a>
+        </motion.div>
+
+        {/* Early Bird CTA Banner */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.65 }}
+          className="mb-12 mx-auto max-w-xl">
+          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-400/60 bg-gradient-to-r from-amber-50 via-yellow-50 to-orange-50 shadow-lg shadow-amber-100 px-6 py-4 flex flex-col sm:flex-row items-center gap-4">
+            {/* Shimmer accent */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-orange-400 rounded-t-2xl" />
+            <div className="flex-1 text-left">
+              <p className="text-[10px] font-black uppercase tracking-widest text-amber-600 mb-0.5">⚡ Limited Time Offer</p>
+              <p className="text-base font-black text-[#0B1E4A] leading-tight">Register Now & Avail</p>
+              <p className="text-amber-600 font-black text-lg leading-tight">Early Bird Discount!</p>
+            </div>
+            <Link
+              to="/register"
+              className="shrink-0 flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white font-black text-sm px-6 py-3 rounded-xl shadow-md shadow-amber-200 hover:shadow-amber-300 transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
+            >
+              Register Now <ArrowRight size={15} />
+            </Link>
+          </div>
         </motion.div>
 
         {/* At a Glance Pillars — auto-scroll on mobile, grid on desktop */}
