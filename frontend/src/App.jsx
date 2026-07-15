@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 import SponsorsSection from './SponsorsSection.jsx';
-import AbstractSubmissionForm from './AbstractSubmissionForm.jsx';
+
 
 const WEB3FORMS_ACCESS_KEY = "045af9f2-df45-4afd-bacb-f59ed567d070";
 
@@ -238,7 +238,7 @@ function CountdownUnit({ value, label }) {
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isAbstractModalOpen, setIsAbstractModalOpen] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -284,9 +284,6 @@ export function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <button onClick={() => setIsAbstractModalOpen(true)} className="btn-outline text-sm py-2.5 px-5 border-[#0B1E4A] text-[#0B1E4A] hover:bg-[#0B1E4A] hover:text-white">
-              Abstract Submission
-            </button>
             <Link to="/register" className="btn-primary text-sm py-2.5 px-5">
               Register Now <ArrowRight size={15} />
             </Link>
@@ -322,9 +319,7 @@ export function Navbar() {
                   </a>
                 ))}
               </nav>
-              <button onClick={() => { setIsAbstractModalOpen(true); setOpen(false); }} className="border-2 border-white/40 text-white hover:bg-white/10 mt-4 flex items-center justify-center font-bold rounded-xl py-3 w-full transition-all">
-                Abstract Submission
-              </button>
+
               <Link to="/register" onClick={() => setOpen(false)} className="btn-primary mt-3 justify-center py-3 w-full">
                 Register Now <ArrowRight size={16} />
               </Link>
@@ -333,19 +328,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Abstract Submission Modal */}
-      <AnimatePresence>
-        {isAbstractModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsAbstractModalOpen(false)}
-              className="absolute inset-0 bg-[#0B1E4A]/80 backdrop-blur-sm" />
-            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl flex justify-center z-10">
-              <AbstractSubmissionForm inModal={true} onClose={() => setIsAbstractModalOpen(false)} />
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+
     </>
   );
 }
@@ -918,7 +901,7 @@ function ParticipantsSection() {
 
 function ContactSection() {
   const [ref, inView] = useInView(0.1);
-  const [form, setForm] = useState({ name: '', designation: '', affiliation: '', email: '', phone: '', abstractTitle: '', abstract: '' });
+  const [form, setForm] = useState({ name: '', designation: '', affiliation: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -944,8 +927,6 @@ function ContactSection() {
     if (!form.affiliation.trim()) e.affiliation = 'Affiliation is required';
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Valid email required';
     if (!form.phone.trim()) e.phone = 'Contact number is required';
-    if (!form.abstractTitle.trim()) e.abstractTitle = 'Abstract Title is required';
-    if (!form.abstract.trim()) e.abstract = 'Abstract is required';
     return e;
   };
 
@@ -977,8 +958,7 @@ function ContactSection() {
     formData.append("Affiliation", form.affiliation);
     formData.append("Email", form.email);
     formData.append("Phone", form.phone);
-    formData.append("Abstract_Title", form.abstractTitle);
-    formData.append("Abstract", form.abstract);
+    formData.append("Message", form.message);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -1047,9 +1027,69 @@ function ContactSection() {
               ))}
             </motion.div>
 
-            {/* Form */}
+            {/* Contact Form */}
             <motion.div variants={scaleIn} className="lg:col-span-3">
-              <AbstractSubmissionForm />
+              <div className="glass rounded-3xl p-8 border border-white shadow-sm">
+                {submitted ? (
+                  <div className="text-center py-10">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400 to-sky-500 flex items-center justify-center mx-auto mb-5 shadow-xl shadow-emerald-200">
+                      <CheckCircle size={36} className="text-white" />
+                    </div>
+                    <h3 className="text-2xl font-black text-[#0B1E4A] mb-3">Message Sent!</h3>
+                    <p className="text-slate-600 text-base leading-relaxed max-w-sm mx-auto">Thank you for reaching out. We will get back to you shortly.</p>
+                    <button onClick={() => { setSubmitted(false); setForm({ name: '', designation: '', affiliation: '', email: '', phone: '', message: '' }); setMathCaptcha({num1:0,num2:0,answer:''}); generateCaptcha(); }}
+                      className="btn-primary mt-8">Send Another Message</button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-black text-[#0B1E4A] mb-1">Get In Touch</h3>
+                      <p className="text-slate-500 text-sm">Have questions? We'd love to hear from you.</p>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {[
+                        { id: 'name', label: 'Name*', type: 'text', placeholder: 'Dr. John Doe' },
+                        { id: 'designation', label: 'Designation*', type: 'text', placeholder: 'e.g. Professor' },
+                        { id: 'affiliation', label: 'Affiliation*', type: 'text', placeholder: 'e.g. University Name' },
+                        { id: 'email', label: 'Email Address*', type: 'email', placeholder: 'john@example.com' },
+                        { id: 'phone', label: 'Phone Number*', type: 'tel', placeholder: '+91 98XXX XXXXX' },
+                      ].map(({ id, label, type, placeholder }) => (
+                        <div key={id} className="flex flex-col gap-1.5">
+                          <label htmlFor={`contact-${id}`} className="text-xs font-bold text-slate-600 uppercase tracking-wider">{label}</label>
+                          <input id={`contact-${id}`} type={type} placeholder={placeholder} value={form[id]}
+                            onChange={(e) => setForm({ ...form, [id]: e.target.value })}
+                            className={`w-full px-4 py-3 rounded-xl border text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 ${errors[id] ? 'border-red-300 bg-red-50/40' : 'border-slate-200'}`} />
+                          {errors[id] && <p className="text-xs text-red-500 font-medium">{errors[id]}</p>}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label htmlFor="contact-message" className="text-xs font-bold text-slate-600 uppercase tracking-wider">Message (Optional)</label>
+                      <textarea id="contact-message" rows={4} placeholder="Your query or message..."
+                        value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 resize-none" />
+                    </div>
+                    <div className="flex flex-col gap-1.5 items-center justify-center my-4">
+                      <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Security Check</label>
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-3/4 mx-auto">
+                        <div className="flex-1 whitespace-nowrap bg-slate-100 rounded-xl px-4 py-3 text-center text-sm font-black text-[#0B1E4A] tracking-wider border border-slate-200">
+                          {mathCaptcha.num1} + {mathCaptcha.num2} = ?
+                        </div>
+                        <input type="number" placeholder="Answer"
+                          value={mathCaptcha.answer}
+                          onChange={(e) => { setMathCaptcha(prev => ({...prev, answer: e.target.value})); if (errors.captcha) setErrors(prev => ({...prev, captcha: null})); }}
+                          className={`flex-1 px-4 py-3 rounded-xl border text-sm font-bold text-center text-slate-800 placeholder-slate-400 outline-none transition-all duration-200 bg-white/70 focus:bg-white focus:border-emerald-300 focus:ring-2 focus:ring-emerald-100 ${errors.captcha ? 'border-red-300 bg-red-50/40' : 'border-slate-200'}`} />
+                      </div>
+                      {errors.captcha && <p className="text-xs text-red-500 font-medium text-center mt-1">{errors.captcha}</p>}
+                    </div>
+                    <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center py-4 text-base disabled:opacity-70 disabled:cursor-not-allowed">
+                      {isSubmitting ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                    <p className="text-center text-xs text-slate-400">We typically respond within 24–48 hours.</p>
+                  </form>
+                )}
+              </div>
             </motion.div>
           </div>
         </motion.div>
