@@ -244,7 +244,7 @@ export default function Register() {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8 mb-10">
               <div className="flex items-center gap-2.5 glass px-5 py-3 rounded-2xl shadow-sm">
                 <CalendarDays size={20} className="text-emerald-500 shrink-0" />
-                <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">12–14 March 2027</span>
+                <span className="font-bold text-[#0B1E4A] text-sm sm:text-base">12–14 February 2027</span>
               </div>
               <div className="flex items-center gap-2.5 glass px-5 py-3 rounded-2xl shadow-sm">
                 <MapPin size={20} className="text-sky-500 shrink-0" />
@@ -466,7 +466,7 @@ export default function Register() {
                   { title: "Early Bird Reg. Closes", date: "30 September 2026", highlight: true },
                   { title: "Abstract Submission Deadline", date: "31 December 2026" },
                   { title: "Acceptance Notification", date: "15 January 2027" },
-                  { title: "Conference Dates", date: "12-14 March 2027", highlight: true }
+                  { title: "Conference Dates", date: "12-14 February 2027", highlight: true }
                 ].map((item, i) => (
                   <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                     <div className="flex items-center justify-center w-5 h-5 rounded-full border-2 border-white bg-sky-500 text-slate-500 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-sm relative z-10" />
