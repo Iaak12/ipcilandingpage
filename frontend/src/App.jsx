@@ -60,6 +60,7 @@ export const NAV_LINKS = [
   { label: 'Themes', href: '#themes' },
   { label: 'Objectives', href: '#objectives' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Advisory Board', href: '#guests' },
   { label: 'Participants', href: '#participants' },
   { label: 'Sponsors', href: '#sponsors' },
   { label: 'Contact', href: '#contact' },
