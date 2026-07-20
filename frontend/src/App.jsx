@@ -17,41 +17,51 @@ const WEB3FORMS_ACCESS_KEY = "045af9f2-df45-4afd-bacb-f59ed567d070";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
-const ADVISORY_BOARD = [
+const NATIONAL_ADVISORY_BOARD = [
   {
     id: 1,
     name: "Dr. S. K. Sarin",
     image: "/Dr. S. K. Sarin.jpeg",
-    role: "Chair, National Academic Advisory Board",
-    desc: "Visionary Leader • Eminent Hepatologist • Guiding Academia"
+    desc: "Gastroenterologist & Hepatologist, Chancellor, ILBS, Delhi"
   },
   {
     id: 2,
-    name: "Mr. Rajiv Kumar",
-    image: "/MR. RAJIV KUMAR.jpeg",
-    role: "Member, National Advisory Board",
-    desc: "Former Vice Chairman, NITI Aayog; Chairman, Pahle India Foundation"
-  },
-  {
-    id: 3,
     name: "Dr. Suversha Khanna",
     image: "/DR. SUVERSHA KHANNA.jpeg",
-    role: "Member, National Advisory Board",
     desc: "President, Dharamshila Cancer Foundation & Research Centre, New Delhi"
   },
   {
-    id: 4,
-    name: "Prof. Heiko Witt",
-    image: "/PROF. HEIKO WITT.jpeg",
-    role: "Member, International Advisory Board",
-    desc: "MD, PhD. Mainz University Medical Center, Germany"
+    id: 3,
+    name: "Mr. Rajiv Kumar",
+    image: "/MR. RAJIV KUMAR.jpeg",
+    desc: "Former Vice Chairman, NITI Aayog; Chairman, Pahle India Foundation"
   },
   {
+    id: 4,
+    name: "Dr G. G. Gangadharan",
+    image: "/Dr_G_G_Gangadharan.jpeg", 
+    desc: "Chairman & CMO, Ayurvedamritham Healthcare, Bengaluru"
+  }
+];
+
+const INTERNATIONAL_ADVISORY_BOARD = [
+  {
     id: 5,
-    name: "Prof. Dr. Asbjørn Mohr Drewes",
+    name: "Dr. Asbjørn M. Drewes",
     image: "/Prof. Dr. Asbjørn Mohr Drewes.jpeg",
-    role: "Member, International Advisory Board",
-    desc: "Global Pancreatology Leader, Denmark"
+    desc: "Aalborg University Hospital, Denmark. Globally recognized authority in pancreatology, pain research, and neurogastroenterology."
+  },
+  {
+    id: 6,
+    name: "Dr. Heiko Witt",
+    image: "/PROF. HEIKO WITT.jpeg",
+    desc: "Technical University of Munich, Germany. Internationally renowned expert in hereditary pancreatitis and pancreatic genetics."
+  },
+  {
+    id: 7,
+    name: "Dr. John Windsor",
+    image: "/Dr_John_Windsor.png", 
+    desc: "University of Auckland, New Zealand. Distinguished pancreatic surgeon and internationally acclaimed leader in acute pancreatitis research."
   }
 ];
 
@@ -826,7 +836,7 @@ function FAQSection() {
 function AdvisoryBoardSection() {
   const [ref, inView] = useInView(0.1);
   return (
-    <section id="guests" ref={ref} className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white relative min-h-[400px]">
+    <section id="guests" ref={ref} className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white relative">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
           <motion.div variants={fadeUp} className="text-center mb-14">
@@ -836,20 +846,49 @@ function AdvisoryBoardSection() {
             </h2>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-8 min-h-[200px]">
-            {ADVISORY_BOARD.map((member) => (
-              <motion.div key={member.id} variants={fadeUp} className="w-full max-w-[340px] bg-white rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 border border-slate-100 hover:shadow-2xl transition-all duration-300 group flex flex-col">
-                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-100">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top group-hover:scale-[1.05] transition-transform duration-500" />
+          {/* National Board */}
+          <motion.div variants={fadeUp} className="mb-20">
+            <div className="flex justify-center mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white bg-[#0B1E4A] px-8 sm:px-12 py-3 sm:py-4 rounded-2xl sm:rounded-full text-center uppercase tracking-wider shadow-lg">
+                National Academic Advisory Board
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+              {NATIONAL_ADVISORY_BOARD.map((member) => (
+                <div key={member.id} className="flex flex-col items-center text-center group">
+                  <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full border-[1.5px] border-slate-800 p-1.5 mb-5 bg-white shadow-sm hover:shadow-md transition-shadow">
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top rounded-full group-hover:scale-[1.03] transition-transform duration-500" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0B1E4A] mb-2">{member.name}</h3>
+                  <p className="text-sm font-semibold text-[#1A3673] leading-relaxed max-w-[250px]">
+                    {member.desc}
+                  </p>
                 </div>
-                <div className="p-6 flex flex-col flex-1 text-center bg-gradient-to-b from-white to-slate-50">
-                  <h3 className="text-xl font-black text-[#0B1E4A] mb-1">{member.name}</h3>
-                  <p className="text-sm font-bold text-emerald-600 uppercase tracking-wide mb-3">{member.role}</p>
-                  <p className="text-slate-600 text-sm font-medium leading-relaxed">{member.desc}</p>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* International Board */}
+          <motion.div variants={fadeUp}>
+            <div className="flex justify-center mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white bg-[#0B1E4A] px-8 sm:px-12 py-3 sm:py-4 rounded-2xl sm:rounded-full text-center uppercase tracking-wider shadow-lg">
+                International Academic Advisory Board
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 max-w-5xl mx-auto">
+              {INTERNATIONAL_ADVISORY_BOARD.map((member) => (
+                <div key={member.id} className="flex flex-col items-center text-center group">
+                  <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full border-[1.5px] border-slate-800 p-1.5 mb-5 bg-white shadow-sm hover:shadow-md transition-shadow">
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top rounded-full group-hover:scale-[1.03] transition-transform duration-500" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0B1E4A] mb-2">{member.name}</h3>
+                  <p className="text-sm font-semibold text-[#1A3673] leading-relaxed max-w-[300px]">
+                    {member.desc}
+                  </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -1240,13 +1279,32 @@ function FloatingActions() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-center">
       <motion.a
+        href="/_brochure.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.05 }}
+        className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-xl shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all hover:-translate-y-1 relative group"
+        aria-label="View Brochure"
+        title="View Brochure"
+      >
+        <span className="absolute right-full mr-4 bg-[#0B1E4A] text-white text-xs font-bold px-3 py-1.5 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          View Brochure
+        </span>
+        <FileText size={22} className="text-white" />
+      </motion.a>
+
+      <motion.a
         href="mailto:ipci2027@gmail.com"
         initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.05 }}
-        className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center shadow-xl shadow-sky-500/30 hover:shadow-sky-500/50 transition-all hover:-translate-y-1"
+        className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center shadow-xl shadow-sky-500/30 hover:shadow-sky-500/50 transition-all hover:-translate-y-1 relative group"
         aria-label="Email Us: ipci2027@gmail.com"
         title="ipci2027@gmail.com"
       >
+        <span className="absolute right-full mr-4 bg-[#0B1E4A] text-white text-xs font-bold px-3 py-1.5 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          Email Us
+        </span>
         <Mail size={22} className="text-white" />
       </motion.a>
 
